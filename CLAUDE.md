@@ -30,9 +30,15 @@ Decide this first, and say it to Nicolò in one line before you start.
 | **Something the system does not cover.** A new kind of block or page. | Build it from the existing tokens and the nearest component. Then tell him what you had to decide, as a short list, so the rule can be written down. |
 | **Something that goes against a rule.** | Do not do it silently, and do not refuse. Name the rule, say what would break, propose the nearest thing that fits the system, and ask. If he confirms, the rule changes first (see below), then the site. |
 
+## Who may change the design system
+
+- **While the site is being rebuilt**, until Nicolò says the rebuild is closed: nobody working in the site repository. Read `../design-system/` and copy from it, never edit it. It is still being changed from the design system project on claude.ai, and an edit made here would be lost at the next update. If you find a defect in it, or a request needs a rule changed, list it for Nicolò and go on: he brings it there.
+- **After the rebuild is closed**: you may change it, in the order given under "When a rule changes", with one limit. Some files are written by the scripts in `../design-system/tools/` and must be changed through their script, never by hand: `tokens.css` (from `tokens.json`, by `gen_tokens.py`), the blocks "LangSwitch", "PosterCard", "MiniCard" and "Dossier" of `components.css` and all of `components.js` (from `lang.py`, `poster.py`, `mini.py`, `dossier.py`), everything in `examples/` and `dossiers/`. `banners/` and `social/` are exports: do not edit them. If you cannot run the script, do not patch the file: write what should change in `DECISIONS.md` under a heading "To bring into the system" and tell Nicolò.
+- The hand-written files are yours to edit after the rebuild: `brand-book.md`, `voice.md`, `docs/`, `templates/`, `DECISIONS.md`, `README.md`, and the part of `components.css` above the block "LangSwitch".
+
 ## When a rule changes
 
-The design system is the source of truth, and the site follows it.
+The design system is the source of truth, and the site follows it. This applies once the rebuild is closed: see above.
 
 1. Add the decision to `../design-system/DECISIONS.md`: the date, what he decided, in his words where you have them.
 2. Change the rule in `brand-book.md`, `voice.md` or the page in `docs/`. Change `tokens.json` for a value, then run `tools/gen_tokens.py`.
