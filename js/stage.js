@@ -23,7 +23,8 @@
   var N = P.length / 4, S = 500, CX = 250, CYPX = 262, SC = 226, D = 4.6, CY = 0.6, FR = 1.25;
   var yaw = 0.8, pitch = 0.6;
   var X = new Float32Array(N), Y = new Float32Array(N), Z = new Float32Array(N + M), K = new Float32Array(N);
-  var order = [], col = {}, i;
+  var order = [], col = {}, i, inks = {};
+  function rgb(r, g, b) { var k = r * 65536 + g * 256 + b; return inks[k] || (inks[k] = 'rgb(' + r + ',' + g + ',' + b + ')'); }
   for (i = 0; i < N + M; i++) order.push(i);
 
   function readColours() {
@@ -45,7 +46,8 @@
       var y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp, k = D / (D - z2);
       return [CX + x1 * SC * k, CYPX - y2 * SC * k, z2, k];
     }
-    function ink(c) { return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+    function ink(c) { return rgb(c[0], c[1], c[2]); }
+    var fill = '', alpha = -1;   // set the canvas state only when it changes: a phone pays for every colour it parses
     for (j = 0; j < M; j++) {
       var pt = parts[j];
       pt.pa = at(pt.a);
@@ -63,7 +65,7 @@
       i = order[j];
       if (i >= N) {
         var t = parts[i - N];
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = alpha = 1; fill = '';
         if (t.b) {
           ctx.strokeStyle = ink(col[t.c]); ctx.lineCap = 'round';
           ctx.lineWidth = t.w / 1000 * SC * (t.pa[3] + t.pb[3]) / 2;
@@ -82,10 +84,11 @@
       } else {
         r = (kind === 2 ? 1.0 : kind === 3 ? 0.95 + 0.7 * near : 1.25 + 1.55 * near) * K[i];
         a = (kind === 2 ? 0.5 : kind === 3 ? 0.9 : 1) * (0.38 + 0.62 * near);
-        c = [0, 1, 2].map(function (n) { return Math.round(col.far[n] + (col.near[n] - col.far[n]) * near); });
+        c = null;
       }
-      ctx.globalAlpha = Math.max(0, a);
-      ctx.fillStyle = ink(c);
+      a = Math.max(0, a); if (a !== alpha) { ctx.globalAlpha = alpha = a; }
+      var ink2 = c ? ink(c) : rgb(Math.round(col.far[0] + (col.near[0] - col.far[0]) * near), Math.round(col.far[1] + (col.near[1] - col.far[1]) * near), Math.round(col.far[2] + (col.near[2] - col.far[2]) * near));
+      if (ink2 !== fill) { ctx.fillStyle = fill = ink2; }
       ctx.beginPath(); ctx.arc(X[i], Y[i], r, 0, 6.2832); ctx.fill();
     }
   }
@@ -106,6 +109,18 @@
     stage.classList.add('has-moved');
     ask();
   });
+  // On a touch screen the hero can scroll up and down under the stage (touch-action: pan-y). A drag that starts
+  // sideways belongs to the stage until the finger lifts: if the browser took it for a scroll halfway, it would
+  // cancel the drag and the stage would turn in jerks. A drag that starts up or down still scrolls the page.
+  var touch = null;
+  stage.addEventListener('touchstart', function (e) { var t = e.touches[0]; touch = e.touches.length === 1 ? { x: t.clientX, y: t.clientY, mine: null } : null; }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    if (!touch || e.touches.length !== 1) return;
+    var t = e.touches[0];
+    if (touch.mine === null) touch.mine = Math.abs(t.clientX - touch.x) >= Math.abs(t.clientY - touch.y);
+    if (touch.mine && e.cancelable) e.preventDefault();
+  }, { passive: false });
+  stage.addEventListener('touchend', function () { touch = null; }, { passive: true });
   ['pointerup', 'pointercancel'].forEach(function (t) {
     stage.addEventListener(t, function () { drag = null; stage.classList.remove('is-dragging'); });
   });
