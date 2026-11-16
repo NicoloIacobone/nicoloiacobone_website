@@ -47,6 +47,17 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); go(first(a.getAttribute('data-go'))); });
   });
+  // a click or a tap on a card beside the middle one brings that card to the middle. It does not open the card
+  // or follow its links: that takes a second click, once the card is in the middle. Added on the site, not in the example.
+  track.addEventListener('click', function (e) {
+    if (!e.detail || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // keyboard activation and modified clicks act as usual
+    var s = e.target.closest('.stop');
+    if (!s || s === e.target || s.classList.contains('is-here')) return;   // the empty margin of a stop, or the stop in the middle
+    var i = stops.indexOf(s);
+    if (i < 0) i = first(s.getAttribute('data-sec'));   // on wide screens the title of Beyond is not a stop: go to its first tile
+    e.preventDefault(); e.stopPropagation();
+    go(i);
+  }, true);
   document.addEventListener('keydown', function (e) {
     if (document.querySelector('dialog[open]')) return;   // a dossier is open: the arrows are its own
     if (e.key === 'ArrowRight') { e.preventDefault(); go(here + 1); }
