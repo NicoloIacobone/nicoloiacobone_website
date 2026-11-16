@@ -1,108 +1,126 @@
 # nicoloiacobone
 
-Sito web personale di Nicolò Iacobone — Computer Vision & 3D Deep Learning Researcher.
+Sito web personale di Nicolò Iacobone: 3D computer vision e robotica.
 
-Realizzato in HTML/CSS/JS puro (nessun build step, nessuna dipendenza) e hostato su
-[GitHub Pages](https://pages.github.com/) su [www.nicoloiacobone.it](https://www.nicoloiacobone.it).
+HTML, CSS e JavaScript puri: nessun framework, nessun build step, nessuna dipendenza. Pubblicato con
+[GitHub Pages](https://pages.github.com/) dal branch `main` su
+[www.nicoloiacobone.it](https://www.nicoloiacobone.it).
+
+Il sito segue il design system in `../design-system/` (fuori da questo repository). Le regole per
+chi lo modifica, persona o agente, sono in `CLAUDE.md`.
 
 ## Funzionalità
 
-- **Portfolio a card.** Ogni progetto è una card che si apre su un dossier con contesto, metodo,
-  contributo, risultati, limiti e collegamenti. Ogni dossier ha un indirizzo diretto, per esempio
-  `#p-vggt`.
-- **Bilingue italiano / inglese.** La lingua iniziale segue `navigator.language`; lo switch
-  manuale la sovrascrive e la salva in `localStorage`.
-- **Tema chiaro di default, dark mode opzionale.** Al primo caricamento si segue
-  `prefers-color-scheme`; lo switch manuale sovrascrive e persiste in `localStorage`.
-  Il tema è applicato prima del primo paint per evitare il flash.
-- **Single page** con nav sticky, ancore, scrollspy e menu compatto su mobile, più la pagina
-  `rubik/` (risolutore del cubo di Rubik con la fotocamera).
-- **Responsive**: layout verificato da 320px in su.
-- Rispetta `prefers-reduced-motion` e resta usabile con JavaScript disattivato: i dossier diventano
-  sezioni della pagina e le card restano ancore.
-- **Privacy by design.** Nessun cookie, nessuna analytics, nessuna risorsa da terze parti: i font
-  (Fraunces, Inter, JetBrains Mono — SIL OFL 1.1) sono self-hosted in `fonts/`, così l'IP dei
-  visitatori non arriva a Google. L'unico storage è `localStorage` per tema e lingua (strumento
-  tecnico, niente banner). L'informativa è in `privacy.html`, linkata dal footer: se aggiungi
-  analytics, embed (YouTube, Maps…) o risorse esterne, va aggiornata e potrebbe servire un banner.
-- **Due easter egg**, solo su richiesta: il mini cubo nel footer e il pesce ricamato nella card
-  della pesca.
+- **Una fila di schede da scorrere di lato.** La home è un binario: hero, Profilo, i sei progetti
+  principali, gli altri otto progetti, Oltre, Contatti. Ci si muove con lo swipe, i due bottoni
+  della barra, le frecce, la rotellina del mouse e le voci della nav.
+- **Schede che si aprono.** Ogni progetto e ogni interesse parte come poster (nome disegnato e
+  copertina) e si apre sui dettagli al passaggio del mouse, al tocco o con la tastiera.
+- **Dossier.** Ogni progetto ha un dossier: il bottone «Approfondisci» allarga la scheda a tutto
+  schermo. Ogni dossier ha il suo indirizzo, lo stesso del sito precedente (`#p-vggt`, `#p-sam2`, …),
+  più `#p-rgbd`. Si chiude con il bottone tondo, Esc, Indietro o «← Tutti i progetti».
+- **Lo stage della hero.** Una point cloud con un braccio robotico, che si ruota trascinandola o con
+  le frecce quando ha il focus.
+- **Italiano e inglese.** Italiano se la prima lingua del browser è l'italiano, inglese altrimenti.
+  Lo switch salva la scelta in `localStorage` (chiave `lang`).
+- **Tema chiaro e scuro.** Segue il sistema; lo switch salva la scelta in `localStorage` (chiave
+  `theme`). Tema e lingua sono applicati nel `<head>`, prima del primo paint.
+- **Senza JavaScript** il binario scorre comunque, le schede si aprono al passaggio e al focus, le
+  voci della nav portano alle sezioni e l'indirizzo `#p-…` mostra il dossier.
+- **Movimento ridotto**: con `prefers-reduced-motion` il binario salta e i dossier si aprono senza
+  animazione.
+- **Privacy by design.** Nessun cookie, nessuna analytics, nessuna risorsa da altri host: font,
+  immagini e video sono serviti dal sito. L'unico storage è `localStorage` per tema e lingua.
+  L'informativa è in `privacy.html`, linkata dal pannello Contatti: se aggiungi analytics, embed o
+  risorse esterne, va aggiornata e potrebbe servire un banner.
 
 ## Struttura
 
 ```
-index.html                     markup e contenuti (testi italiani inline come fallback)
-privacy.html                   informativa privacy e cookie (IT/EN nel markup)
-fonts/                         font self-hosted (woff2, subset latin + latin-ext)
-css/style.css                  token, reset, nav, bottoni, footer: condiviso con privacy e rubik/
-css/home.css                   tutto il resto, caricato solo da index.html
-js/main.js                     dizionario i18n, tema, nav mobile, scrollspy, mappa
-js/dossiers.js                 apertura dei dossier: router sull'hash e <dialog> nativo
-js/eggs.js                     easter egg
-js/travels.js                  ← i paesi visitati e quelli in cui hai vissuto
-js/world-map-data.js           confini nazionali (generato, non si tocca)
+index.html                     la home: binario, schede, i 14 dossier, i disegni in SVG inline
+ds/tokens.css                  ← copia di ../design-system/tokens.css: non si modifica qui
+ds/components.css              ← copia di ../design-system/components.css
+ds/components.js               ← copia di ../design-system/components.js (schede, lingua, dossier)
+ds/fonts/                      Nunito, Nunito Sans, JetBrains Mono (woff2) con le licenze SIL OFL
+css/track.css                  layout della home: binario, hero, pannelli, barra, altri progetti
+css/stage.css                  lo stage della hero
+css/drawings.css               colori dei disegni di vggt e RGB-D, chiaro e scuro
+js/track.js                    il binario, la barra, i cinque modi di muoversi, il tema, NI.goStop
+js/stage.js                    lo stage: point cloud e braccio, trascinamento e frecce
+media/                         immagini e video dei dossier (i video si caricano solo al play)
+favicon.svg                    il monogramma NI
 imgs_and_docs/CV.pdf           curriculum scaricabile
 imgs_and_docs/foto_profilo.jpeg
-imgs_and_docs/campione_grandioso.png
-imgs_and_docs/pesce_foto.jpeg
-imgs_and_docs/tatuaggio.jpeg
-imgs_and_docs/shrek_2.jpg      locandina del film preferito
-imgs_and_docs/projects/        figure dei dossier (WebP)
+privacy.html                   informativa privacy e cookie (IT/EN nel markup)
 rubik/                         ← copiata da doppelbot (web/rubik, `sh web/publish.sh`): non si modifica qui
 rubik/vendor/                  OpenCV.js (Apache-2.0) e cubejs (MIT), con le loro licenze
 CNAME                          dominio personalizzato
+CLAUDE.md                      regole per gli agenti, da ../design-system/AGENTS.md
 ```
+
+L'ordine di caricamento conta: `js/track.js` prima di `ds/components.js`, perché `NI.dossiers()`
+usa `NI.goStop()` definito dal binario.
+
+Restano nel repository, ma la home non li usa più:
+
+```
+css/style.css, fonts/, js/main.js   usati da privacy.html e da rubik/: non si toccano
+css/home.css                        stili della home precedente
+js/dossiers.js, js/eggs.js          dossier ed easter egg della home precedente
+js/travels.js, js/world-map-data.js mappa interattiva dei viaggi (non c'è più nella home)
+imgs_and_docs/projects/             figure dei dossier precedenti (le nuove sono in media/)
+imgs_and_docs/campione_grandioso.png, shrek_2.jpg, pesce_foto.jpeg, tatuaggio.jpeg
+```
+
+Attenzione: anche se nessuna pagina li collega, questi file restano pubblici al loro indirizzo.
 
 La pagina `rubik/` usa la fotocamera solo nel browser: le immagini non lasciano il dispositivo
 (vedi `privacy.html`, sezione 3). I suoi testi IT/EN stanno in `rubik/js/i18n.js`.
 
-### Vincoli con `rubik/`
+### Vincoli con `rubik/` e `privacy.html`
 
-`rubik/` viene sovrascritta da `publish.sh` di doppelbot, ma dipende da questo sito. Prima di
-cambiare `css/style.css`:
+`rubik/` viene sovrascritta da `publish.sh` di doppelbot, ma dipende da questo sito: carica
+`../css/style.css` e `../fonts/inter-latin.woff2`. `privacy.html` carica `css/style.css` e
+`js/main.js`. La home nuova non usa nessuno di questi file. Prima di cambiare `css/style.css`:
 
 - I **nomi** dei token e delle classi di nav, bottoni, sezioni e footer non si cambiano; i valori sì.
 - Niente regole globali su `section`, `canvas`, `video`, `svg`, `li`, niente `transform`, `filter` o
   `contain` su `html`, `body`, `main`, `.wrap`: romperebbero il `position: fixed` della pagina.
-- Le regole che dipendono da `html.js` stanno in `css/home.css`: `rubik/` non carica `main.js`.
-- `js/eggs.js` importa `rubik/js/cube.js` (`SOLVED`, `applyMove`, `applyMoves`). Se quell'API cambia,
-  il mini cubo smette di animarsi; il link al risolutore resta.
+- `rubik/` non carica `main.js`.
+
+Le pagine condividono le chiavi `theme` e `lang` di `localStorage`, quindi tema e lingua scelti
+nella home valgono anche lì.
 
 ## Sviluppo
 
 Nessuna build richiesta: servire la cartella con un server statico, per esempio
-`python3 -m http.server`. Da `file://` funziona quasi tutto, ma il browser blocca l'import del modello
-del cubo e la mini animazione lascia il posto al link.
+`python3 -m http.server`. Da `file://` i dossier e lo stage funzionano, ma il risolutore di `rubik/`
+no.
 
-### Aggiungere o modificare un progetto
+### Modificare la home
 
-1. In `index.html`, aggiungi la card nell'area giusta: un `<article class="pcard">` con il link
-   `<a class="pcard__link" href="#p-nome">`.
-2. Sempre in `index.html`, aggiungi il dossier `<dialog class="dossier" id="p-nome" …>` dentro
-   `#dossiers`, copiando la struttura di uno esistente.
-3. In `js/main.js`, aggiungi `p.nome.title` e `p.nome.cat` in entrambe le lingue.
-4. Le figure vanno in `imgs_and_docs/projects/`, con `width`, `height`, `loading="lazy"` e il testo
-   alternativo nel dizionario.
+La home è montata da `../design-system/examples/home.html`. Le regole sono in
+`../design-system/README.md` e in `../design-system/docs/`.
+
+- **Disegni** (nomi disegnati, copertine, titoli dei dossier): non si ridisegnano a mano. Si cambiano
+  con gli script di `../design-system/tools/`.
+- **Dossier**: i file sono in `../design-system/dossiers/`, uno per progetto, già nelle due lingue.
+  In `index.html` sono montati così come sono, dopo il binario.
+- **`ds/`**: si cambia prima in `../design-system/`, poi si ricopia.
+- **Indirizzi del sito precedente**: `#hero`, `#projects`, `#research` e `#path` portano alla sezione
+  corrispondente (tabella `OLD` in `js/track.js`). Gli indirizzi `#p-…` aprono il dossier.
 
 **Regola sui contenuti:** numeri e figure solo se verificati nel CV o nelle repository. Un'immagine
-di un progetto upstream dichiara autore e licenza; uno schema derivato dalla documentazione porta
-l'etichetta «schema illustrativo». Non si confrontano misure di protocolli diversi.
-
-### Aggiornare la mappa dei viaggi
-
-Apri `js/travels.js` e aggiungi il codice ISO 3166-1 alpha-2 del paese (due lettere) nella
-lista `lived` o `visited`. Salva, ricarica: nient'altro. Il file contiene già l'elenco dei
-codici più comuni come promemoria.
-
-I confini vengono da `js/world-map-data.js`, generato da
-[Natural Earth](https://www.naturalearthdata.com/) 1:110m (pubblico dominio) e disegnato in
-proiezione di Robinson direttamente in SVG — nessuna libreria, nessuna chiamata di rete.
-Quel file non va modificato a mano.
+di un progetto upstream dichiara autore e licenza; uno schema porta l'etichetta «Schema
+illustrativo». Non si confrontano misure di protocolli diversi.
 
 ### Modificare i testi
 
-- **Stringhe brevi** (titoli, etichette, attributi): il markup italiano in `index.html` e le due voci
-  del dizionario `I18N` in `js/main.js`, agganciate con `data-i18n` (e `data-i18n-attr` per gli
-  attributi).
-- **Testi lunghi** (riassunti e dossier): due blocchi affiancati nel markup, `.only-it` e `.only-en`,
-  con il loro attributo `lang`.
+Ogni testo ha le due lingue affiancate nel markup, in due elementi con la classe `only-it` e
+`only-en` e il loro attributo `lang`. Le etichette per i lettori di schermo stanno in
+`data-label-it` e `data-label-en`. Il dizionario `I18N` di `js/main.js` serve solo a `privacy.html`.
+
+### La mappa dei viaggi
+
+La mappa interattiva non è più nella home. La scheda «Viaggi» è un disegno statico: cambiare
+`js/travels.js` non la aggiorna, si ridisegna con `../design-system/tools/personal.py`.

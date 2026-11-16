@@ -1,0 +1,89 @@
+/* Home page layout: the track, the hero, the panels, the bar and the stop of the secondary projects.
+   Copied from design-system/examples/home.html, where these rules sit under the comments that name them. */
+html,body{height:100%;margin:0}
+body{background:var(--ground);overflow:hidden}
+.app{display:flex;flex-direction:column;height:100dvh}
+.top{flex:none;padding:var(--space-4) var(--space-5) var(--space-3)}
+.top .ni-nav{max-width:var(--page-max);margin:0 auto}
+.brand-dot{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:var(--ink);color:var(--on-ink);font:900 18px/1 var(--font-display);letter-spacing:-.02em}
+/* The track: every card is a stop */
+.track{flex:1;display:flex;align-items:stretch;gap:var(--space-5);min-height:0;padding:0 max(var(--space-5),calc((100vw - 880px) / 2));overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.track{--fade:min(12vw,160px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
+.stop{transition:opacity .35s ease}
+/* without scripts every card is at full strength, and the controls that need the script are not shown */
+.js .stop:not(.is-here){opacity:.7}
+html:not(.js) :is(.bar,.ni-lang,[data-theme-switch]){display:none}
+.stop{flex:none;display:flex;flex-direction:column;justify-content:center;box-sizing:content-box;width:min(880px,calc(100vw - 2 * var(--space-5)));min-height:0;margin:0 -28px;padding:20px 28px 44px;scroll-snap-align:center;overflow-y:auto;scrollbar-width:none}
+.stop--tile{width:min(340px,calc(100vw - 4 * var(--space-5)))}
+.stop > *{flex:none;margin-block:auto}
+/* arriving at Beyond: its title and its first tile sit in the middle together, and the card before is pushed out of view */
+@media (min-width:1024px){
+  .stop--label{scroll-snap-align:none;margin-left:calc(max(0px,50vw - 376px) - 28px)}
+  .stop--label + .stop{scroll-margin-left:364px}   /* the title and the first tile are centred together, clear of the fading edge */
+}
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-6);align-items:center}
+.hero__sentence{margin:0;font:900 60px/1.03 var(--font-display);letter-spacing:-.025em;text-wrap:balance}
+.hero__see{color:var(--vggt-text);white-space:nowrap}.hero__act{color:var(--openfactory-text)}
+.hero__lead{max-width:30em;margin:var(--space-4) 0 0;color:var(--muted);font:400 20px/1.5 var(--font-text)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-5)}
+.hero__side{display:flex;flex-direction:column;align-items:center;gap:var(--space-3)}
+/* Sections that are one card */
+.panel{display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-6);border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--shadow-rest)}
+.is-here .panel{box-shadow:var(--shadow-float)}
+.sec__title{margin:0;font:900 30px/1.15 var(--font-display);letter-spacing:-.02em}
+.about{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--space-5);align-items:start}
+.about__photo{margin:0;overflow:hidden;border-radius:var(--radius-md);aspect-ratio:3/4;background:var(--sunken)}
+.about__photo img{display:block;width:100%;height:100%;object-fit:cover}
+.about__lead{margin:0;font:400 18px/1.5 var(--font-text)}
+.path{display:flex;flex-direction:column;gap:var(--space-3);margin:var(--space-4) 0 0;padding:0;list-style:none}
+.path li{display:grid;grid-template-columns:118px minmax(0,1fr);column-gap:var(--space-3)}
+.path__when{padding-top:3px;color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+.path__what{margin:0;font:400 15px/1.5 var(--font-text)}
+.path__what b{font-weight:700}
+.contact p{margin:0;color:var(--muted);font:400 20px/1.5 var(--font-text)}
+.contact__actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-5)}
+.intro{padding:0 var(--space-3)}
+.intro p{margin:var(--space-2) 0 0;color:var(--muted);font:400 20px/1.5 var(--font-text)}
+/* A card in the track never grows past its stop, and the one in the middle floats higher */
+.stop .ni-poster{height:min(var(--h),100%)}
+.is-here .ni-poster{box-shadow:var(--shadow-float)}
+.hide{position:absolute;width:0;height:0}
+/* The bar under the track */
+.bar{flex:none;display:flex;align-items:center;justify-content:center;gap:var(--space-4);padding:0 var(--space-5) var(--space-4)}
+.bar .ni-iconbtn[disabled]{opacity:.35;cursor:default}
+.ticks{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none}
+.ticks li{width:8px;height:8px;border-radius:50%;background:var(--line);transition:width .2s ease,background-color .2s ease}
+.ticks li.is-here{width:26px;border-radius:999px;background:var(--ink)}
+.ticks li.gap{margin-left:10px}
+@media (max-width:767px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:var(--space-5)}
+  .hero__sentence{font-size:40px}
+  .hero__lead{font-size:18px}
+  .hero .stage{width:70%}
+  .about{grid-template-columns:minmax(0,1fr)}
+  .about__photo{width:55%}
+  .path li{grid-template-columns:minmax(0,1fr)}
+  .panel{padding:var(--space-5);border-radius:var(--radius-md)}
+  .stop{justify-content:flex-start;padding:8px 28px 20px}
+  .track{--fade:22px}
+  .ticks{gap:4px}.ticks li{width:6px;height:6px}.ticks li.is-here{width:18px}.ticks li.gap{margin-left:5px}.bar{gap:var(--space-2);padding-inline:var(--space-3)}
+  .top{padding:var(--space-3) var(--space-4) var(--space-2)}
+  .ni-nav__brand span.name{display:none}
+}
+@media (prefers-reduced-motion:reduce){.track{scroll-behavior:auto}.ticks li{transition:none}}
+
+/* More work: the secondary projects in one stop */
+.more{display:flex;flex-direction:column;gap:var(--space-4);max-height:100%}
+.more__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(112px,124px);gap:12px}
+.is-here .ni-mini{box-shadow:var(--shadow-float)}
+@media (max-width:767px){
+  .more{gap:var(--space-3)}
+  .more__grid{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto;gap:8px}
+  .more .sec__title{font-size:24px}
+}
+
+/* Skip link: a site addition, not in the example. Hidden until it takes keyboard focus. */
+.skip{position:absolute;top:var(--space-3);left:var(--space-3);z-index:30;display:inline-flex;align-items:center;height:44px;padding:0 var(--space-5);border-radius:var(--radius-full);background:var(--ink);color:var(--on-ink);font:800 16px/1 var(--font-text);text-decoration:none;transform:translateY(calc(-100% - var(--space-4)))}
+.skip:focus{transform:none}

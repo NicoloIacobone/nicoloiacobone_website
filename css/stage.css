@@ -1,0 +1,30 @@
+/* The stage of the hero. Copied from design-system/examples/home.html. */
+/* ---------- Stage ---------- */
+.stage{position:relative;width:100%;max-width:500px;aspect-ratio:1;border-radius:50%;background:var(--surface);box-shadow:var(--shadow-float);touch-action:pan-y}
+.stage__clip{position:absolute;inset:0;overflow:hidden;border-radius:50%}
+.stage svg,.stage canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.stage canvas{display:none}
+.stage path{fill:none;stroke-linecap:round}
+.stage .f{stroke:var(--muted)}
+.stage .l0{stroke:var(--openfactory-link)}
+.stage .l1{stroke:var(--openfactory-link-2)}
+.stage .j{fill:var(--openfactory-joint,var(--ink))}
+.stage .jc{fill:var(--surface)}
+.stage .c0{stroke:color-mix(in srgb,var(--vggt-near) 4%,var(--vggt-far))}.stage .c1{stroke:color-mix(in srgb,var(--vggt-near) 12%,var(--vggt-far))}.stage .c2{stroke:color-mix(in srgb,var(--vggt-near) 21%,var(--vggt-far))}.stage .c3{stroke:color-mix(in srgb,var(--vggt-near) 29%,var(--vggt-far))}.stage .c4{stroke:color-mix(in srgb,var(--vggt-near) 38%,var(--vggt-far))}.stage .c5{stroke:color-mix(in srgb,var(--vggt-near) 46%,var(--vggt-far))}.stage .c6{stroke:color-mix(in srgb,var(--vggt-near) 54%,var(--vggt-far))}.stage .c7{stroke:color-mix(in srgb,var(--vggt-near) 62%,var(--vggt-far))}.stage .c8{stroke:color-mix(in srgb,var(--vggt-near) 71%,var(--vggt-far))}.stage .c9{stroke:color-mix(in srgb,var(--vggt-near) 79%,var(--vggt-far))}.stage .c10{stroke:color-mix(in srgb,var(--vggt-near) 88%,var(--vggt-far))}.stage .c11{stroke:color-mix(in srgb,var(--vggt-near) 96%,var(--vggt-far))}
+.stage.is-live{cursor:grab}
+.stage.is-live canvas{display:block}
+.stage.is-live svg{display:none}
+.stage.is-dragging{cursor:grabbing}
+.stage__hint{position:absolute;bottom:18px;left:50%;display:none;transform:translateX(-50%);pointer-events:none;transition:opacity .2s ease}
+.stage.is-live .stage__hint{display:inline-flex}
+.stage.has-moved .stage__hint{opacity:0}
+.stage__ink{position:absolute;width:0;height:0;visibility:hidden}
+.stage__ink--near{color:var(--vggt-near)}
+.stage__ink--far{color:var(--vggt-far)}
+.stage__ink--floor{color:var(--muted)}
+.stage__ink--link0{color:var(--openfactory-link)}
+.stage__ink--link1{color:var(--openfactory-link-2)}
+.stage__ink--joint{color:var(--openfactory-joint,var(--ink))}
+.stage__ink--core{color:var(--surface)}
+.stage__note{margin:0;color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+@media (prefers-reduced-motion:reduce){.stage__hint{transition:none}}

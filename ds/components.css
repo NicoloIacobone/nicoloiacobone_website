@@ -1,0 +1,287 @@
+/* Nicolò Iacobone design system: component styles. Every value comes from tokens.css. */
+.ni, .ni * { box-sizing: border-box; }
+.ni { font-family: var(--font-text); color: var(--ink); -webkit-font-smoothing: antialiased; }
+.ni :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* ---------- Button ---------- */
+.ni-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); height: 58px; padding: 0 30px; border: 0; border-radius: var(--radius-full); font: 800 16px/1 var(--font-text); text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.ni-btn svg { width: 18px; height: 18px; flex: none; }
+.ni-btn--primary { background: var(--ink); color: var(--on-ink); }
+.ni-btn--primary:hover { transform: translateY(-2px); }
+.ni-btn--secondary { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); }
+.ni-btn--secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-float); }
+.ni-btn--quiet { background: transparent; color: var(--ink); }
+.ni-btn--quiet:hover { background: var(--sunken); }
+.ni-btn--small { height: 46px; padding: 0 22px; font-size: 15px; }
+.ni-btn[disabled], .ni-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.ni-iconbtn { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; padding: 0; border: 0; border-radius: 50%; background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); cursor: pointer; }
+.ni-iconbtn svg { width: 20px; height: 20px; }
+
+/* ---------- Link ---------- */
+.ni-link { color: var(--ni-accent, var(--ink)); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: color-mix(in oklab, currentColor 35%, transparent); }
+.ni-link:hover { text-decoration-color: currentColor; }
+.ni-link--arrow::after { content: "\2192"; display: inline-block; margin-left: .3em; transition: transform .15s ease; }
+.ni-link--arrow:hover::after { transform: translateX(3px); }
+.ni-pending { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border: 2px dashed var(--ni-accent, var(--muted)); border-radius: var(--radius-full); color: var(--ni-accent, var(--muted)); font: 500 11.5px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+
+/* ---------- Tag, chip, scope ---------- */
+.ni-tag { display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: var(--radius-full); background: var(--sunken); color: var(--ink); font: 700 13px/1 var(--font-text); white-space: nowrap; }
+.ni-tag--matter { background: color-mix(in oklab, var(--ni-accent) 13%, var(--surface)); color: var(--ni-accent); }
+.ni-chip { display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 18px 0 14px; border-radius: var(--radius-full); background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); font: 700 14px/1 var(--font-text); white-space: nowrap; }
+.ni-chip__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); }
+.ni-scope { color: var(--ni-accent, var(--muted)); font: 700 14px/1.3 var(--font-text); }
+
+/* ---------- Nav ---------- */
+.ni-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.ni-nav__brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--ink); font: 800 18px/1 var(--font-display); text-decoration: none; }
+.ni-nav__avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-rest); }
+.ni-nav__track { display: flex; gap: 2px; margin: 0; padding: 5px; border-radius: var(--radius-full); background: var(--sunken); list-style: none; }
+.ni-nav__item { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 22px; border-radius: var(--radius-full); color: var(--muted); font: 700 15px/1 var(--font-text); text-decoration: none; }
+.ni-nav__item:hover { color: var(--ink); }
+.ni-nav__item[aria-current="page"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); }
+@media (max-width: 768px) {
+  .ni-nav__track { order: 3; width: 100%; }
+  .ni-nav__track li { flex: 1; }
+  .ni-nav__item { width: 100%; padding: 0 8px; }
+}
+
+/* ---------- Footer ---------- */
+.ni-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4) var(--space-6); padding: var(--space-6); border-radius: var(--radius-lg); background: var(--sunken); color: var(--muted); font: 400 15px/1.5 var(--font-text); }
+.ni-footer__brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--ink); font: 800 16px/1 var(--font-display); }
+.ni-footer__brand svg { width: 44px; height: auto; }
+.ni-footer__links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
+.ni-footer__note { width: 100%; margin: 0; font: 400 12px/1.4 var(--font-mono); }
+
+/* ---------- Project card ---------- */
+.ni-card { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-float); }
+.ni-card__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 46px; }
+.ni-card__open { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--on-ink); }
+.ni-card__open svg { width: 18px; height: 18px; }
+.ni-card__name { height: 104px; }
+.ni-card__name svg { display: block; height: 100%; max-width: 100%; }
+.ni-card__title { margin: 0; font: 800 22px/1.25 var(--font-display); letter-spacing: -.01em; }
+.ni-card__body { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); }
+.ni-card__text { display: flex; flex: 1 1 240px; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.ni-card__text p { margin: 0; font: 400 17px/1.5 var(--font-text); }
+.ni-card__cover { flex: 0 1 280px; height: 190px; }
+.ni-card__cover svg { display: block; width: 100%; height: 100%; }
+.ni-card__cover--media { overflow: hidden; border-radius: var(--radius-md); box-shadow: var(--shadow-rest); }
+.ni-card__cover--media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ni-card__metric { color: var(--ni-accent, var(--ink)); font: 900 34px/1.1 var(--font-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.ni-card__unit { color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
+.ni-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+@media (max-width: 480px) { .ni-card { padding: var(--space-5); border-radius: var(--radius-md); } }
+
+/* ---------- Results table and metrics ---------- */
+.ni-table-wrap { overflow-x: auto; padding: var(--space-3) var(--space-5) var(--space-4); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-rest); }
+.ni-table { width: 100%; border-collapse: separate; border-spacing: 0; font: 400 15px/1.4 var(--font-text); }
+.ni-table th, .ni-table td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: baseline; white-space: nowrap; }
+.ni-table th:first-child, .ni-table td:first-child { min-width: 220px; white-space: normal; }
+.ni-table thead th { color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
+.ni-table tbody tr:last-child > * { border-bottom: 0; }
+.ni-table .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.ni-table .best { font-weight: 700; }
+.ni-table small { display: block; color: var(--muted); font-size: 13px; font-weight: 400; }
+.ni-table tr.is-ours > * { border-bottom-color: transparent; background: color-mix(in oklab, var(--ni-accent, var(--ink)) 9%, var(--surface)); }
+.ni-table tr.is-ours > :first-child { border-radius: 14px 0 0 14px; color: var(--ni-accent, var(--ink)); font-weight: 700; }
+.ni-table tr.is-ours > :last-child { border-radius: 0 14px 14px 0; }
+.ni-table__note { max-width: var(--text-measure); margin: var(--space-3) 0 0; color: var(--muted); font: 400 15px/1.5 var(--font-text); }
+.ni-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-5); margin: 0; }
+.ni-metrics > div { display: flex; flex-direction: column; gap: 3px; }
+.ni-metrics dt { order: 2; color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
+.ni-metrics dd { order: 1; margin: 0; color: var(--ni-accent, var(--ink)); font: 900 34px/1.1 var(--font-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+
+/* ---------- Figure and video ---------- */
+.ni-figure { display: flex; flex-direction: column; gap: var(--space-3); margin: 0; }
+.ni-figure__frame { position: relative; overflow: hidden; border-radius: var(--radius-md); background: var(--sunken); box-shadow: var(--shadow-rest); }
+.ni-figure__frame > img, .ni-figure__frame > video, .ni-figure__frame > svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ni-figure__frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.ni-figure figcaption { max-width: var(--text-measure); color: var(--muted); font: 400 15px/1.5 var(--font-text); }
+.ni-figure figcaption b { color: var(--ink); font-weight: 700; }
+.ni-figure__note { display: block; margin-top: var(--space-1); font: 400 12px/1.4 var(--font-mono); }
+.ni-video__play { position: absolute; top: 50%; left: 50%; display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; padding: 0; border: 0; border-radius: 50%; background: var(--surface); color: var(--ink); box-shadow: var(--shadow-float); transform: translate(-50%, -50%); cursor: pointer; }
+.ni-video__play svg { width: 28px; height: 28px; margin-left: 4px; }
+.ni-video__chip { position: absolute; right: var(--space-4); bottom: var(--space-4); display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: var(--radius-full); background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); font: 400 12px/1 var(--font-mono); }
+@media (max-width: 480px) { .ni-figure__frames { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Code ---------- */
+.ni-code { overflow: hidden; border-radius: var(--radius-md); background: var(--sunken); color: var(--ink); }
+.ni-code__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-2) 0 var(--space-5); color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
+.ni-code__copy { height: 44px; padding: 0 16px; border: 0; border-radius: var(--radius-full); background: transparent; color: var(--ink); font: 700 13px/1 var(--font-text); cursor: pointer; }
+.ni-code__copy:hover { background: var(--surface); }
+.ni-code pre { margin: 0; padding: var(--space-2) var(--space-5) var(--space-5); overflow-x: auto; font: 400 14px/1.6 var(--font-mono); tab-size: 2; }
+.ni-code .c, .ni-code .p { color: var(--muted); }
+.ni-code .p { user-select: none; }
+.ni-code-inline { padding: 2px 7px; border-radius: 8px; background: var(--sunken); font: 400 .88em/1 var(--font-mono); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ni-btn, .ni-link--arrow::after { transition: none; }
+  .ni-btn:hover, .ni-link--arrow:hover::after { transform: none; }
+}
+/* ---------- LangSwitch: Italian and English ---------- */
+/* Both texts are in the page, in elements with the class only-it or only-en. The attribute lang on <html> shows one. */
+html[lang="it"] .only-en, html:not([lang="it"]) .only-it { display: none !important; }
+.ni-lang { display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--radius-full); background: var(--sunken); }
+.ni-lang__btn { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px; padding: 0 12px; border: 0; border-radius: var(--radius-full); background: transparent; color: var(--muted); font: 700 14px/1 var(--font-text); letter-spacing: .04em; cursor: pointer; }
+.ni-lang__btn:hover { color: var(--ink); }
+.ni-lang__btn[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-rest); }
+.ni-nav__tools { display: inline-flex; align-items: center; gap: var(--space-3); }
+
+/* ---------- PosterCard: a card that opens ---------- */
+/* Closed it is a poster: the drawn name and the drawing. Open it shows the details. One variable, --o, runs from 0 (poster) to 1 (details). */
+.ni-poster{--o:0;--pe:none;--k:var(--kd);--kc:var(--kcd);position:relative;container-type:size;width:100%;--h:520px;height:var(--h);min-height:440px;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--shadow-rest);cursor:pointer;transition:box-shadow .3s ease}
+.ni-poster.is-open,.ni-poster:has(:focus-visible){--o:1;--pe:auto}
+@media (hover:hover) and (pointer:fine){.ni-poster:hover{--o:1;--pe:auto}}
+.ni-poster::before{content:"";position:absolute;inset:0;background:var(--tint,color-mix(in oklab,var(--ni-accent) 10%,var(--surface)));}   /* the ground of the poster stays when the card opens (asked by Nicolò) */
+.ni-poster__name,.ni-poster__cover{position:absolute;transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.ni-poster__name svg,.ni-poster__cover svg{display:block;width:100%;height:100%}
+.ni-poster__name{left:36px;top:76px;width:60cqw;height:64px;transform-origin:0 0;
+  transform:translate(calc((1 - var(--o)) * (7cqw - 36px)),calc((1 - var(--o)) * (9cqh - 76px))) scale(calc(1 + (1 - var(--o)) * (var(--k) - 1)))}
+.ni-poster__cover{right:36px;top:170px;width:38cqw;height:250px;transform-origin:100% 100%;
+  transform:translate(calc((1 - var(--o)) * (36px - 4cqw)),calc((1 - var(--o)) * (96cqh - 420px))) scale(calc(1 + (1 - var(--o)) * (var(--kc) - 1)))}
+.ni-poster__scope,.ni-poster__body{position:absolute;opacity:var(--o);pointer-events:var(--pe);transition:opacity .3s ease}
+.ni-poster.is-open :is(.ni-poster__scope,.ni-poster__body),.ni-poster:has(:focus-visible) :is(.ni-poster__scope,.ni-poster__body){transition-delay:.18s}
+@media (hover:hover) and (pointer:fine){.ni-poster:hover :is(.ni-poster__scope,.ni-poster__body){transition-delay:.18s}}
+.ni-poster__scope{left:36px;top:40px}
+.ni-poster__body{left:36px;top:156px;width:50cqw;display:flex;flex-direction:column;gap:12px}
+.ni-poster__body p{margin:0;font:400 17px/1.5 var(--font-text)}
+.ni-poster__body .ni-card__title{font-size:22px}
+.ni-poster__toggle{position:absolute;top:20px;right:20px;width:44px;height:44px;z-index:1}
+.ni-poster__toggle svg{transition:transform .3s ease;transform:rotate(calc(var(--o) * 45deg))}
+/* a personal tile: the poster is its cover alone */
+.ni-poster--tile{--tint:var(--surface);--h:460px;min-height:400px}
+.ni-poster--tile .ni-poster__name{left:24px;top:24px;width:240px;height:var(--nh,36px);transform:translate(0,calc((1 - var(--o)) * 6px)) scale(calc(1 + (1 - var(--o)) * (var(--k) - 1)))}
+.ni-poster--tile .ni-poster__cover{left:24px;right:24px;top:calc(74px + var(--sh,0px));width:auto;height:110px;transform-origin:50% 0;
+  transform:translate(0,calc((1 - var(--o)) * (62cqh - 74px - var(--sh,0px) - 55px * var(--kc)))) scale(calc(1 + (1 - var(--o)) * (var(--kc) - 1)))}
+.ni-poster--tile .ni-poster__body{left:24px;right:24px;top:calc(198px + var(--sh,0px));width:auto;gap:8px}
+.ni-poster--tile .ni-poster__toggle{top:14px;right:14px}
+.ni-poster__title{margin:0;font:800 22px/1.25 var(--font-display);letter-spacing:-.01em}
+.ni-poster__metric{font:900 34px/1.1 var(--font-display);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.ni-poster__unit,.ni-poster__note{color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+.ni-poster__links{display:flex;flex-wrap:wrap;gap:4px 14px}
+.ni-poster__links .ni-link{font-size:14px}
+@media (max-width:767px){
+  .ni-poster{--k:var(--kp);--kc:1.9;--h:640px;min-height:520px;border-radius:var(--radius-md)}
+  .ni-poster__name{left:24px;top:64px;width:78cqw;height:48px;transform:translate(calc((1 - var(--o)) * (7cqw - 24px)),calc((1 - var(--o)) * (17cqh - 64px))) scale(calc(1 + (1 - var(--o)) * (var(--k) - 1)))}
+  .ni-poster__cover{right:24px;top:auto;bottom:20px;width:46cqw;height:84px;transform:translate(calc((1 - var(--o)) * (24px - 5cqw)),calc((1 - var(--o)) * (20px - 4cqh))) scale(calc(1 + (1 - var(--o)) * (var(--kc) - 1)))}
+  .ni-poster__scope{left:24px;top:28px;max-width:66cqw}
+  .ni-poster__body{left:24px;top:124px;width:calc(100cqw - 48px);gap:10px}
+  .ni-poster__body p{font-size:15px}
+  .ni-poster__body .ni-card__title{font-size:20px}
+  .ni-poster__body .ni-card__metric{font-size:30px}
+  .ni-poster--tile{--k:calc(var(--kd) * .82);--kc:calc(var(--kcd) * .86);--h:460px;min-height:400px;border-radius:var(--radius-lg)}
+  .ni-poster--tile .ni-poster__name{left:24px;top:24px;width:204px;height:var(--nh,36px);transform:translate(0,calc((1 - var(--o)) * 6px)) scale(calc(1 + (1 - var(--o)) * (var(--k) - 1)))}
+  .ni-poster--tile .ni-poster__cover{top:calc(74px + var(--sh,0px));bottom:auto;width:auto;height:110px;transform:translate(0,calc((1 - var(--o)) * (62cqh - 74px - var(--sh,0px) - 55px * var(--kc)))) scale(calc(1 + (1 - var(--o)) * (var(--kc) - 1)))}
+  .ni-poster--tile .ni-poster__body{top:calc(198px + var(--sh,0px))}
+  .ni-poster--tile .ni-poster__body p{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){.ni-poster__name,.ni-poster__cover,.ni-poster__scope,.ni-poster__body,.ni-poster__toggle svg{transition:none}}
+
+/* ---------- MiniCard: a secondary project. A small PosterCard: the name in MatterDots, then the title and the link ---------- */
+.ni-mini{--o:0;--dot-off:.3;position:relative;overflow:hidden;min-height:112px;padding:16px 18px;border-radius:var(--radius-md);background:color-mix(in oklab,var(--dot,var(--surface)) 9%,var(--surface));box-shadow:var(--shadow-rest);cursor:pointer}   /* --dot: the colour of the group. The ground takes 9% of it, like the ground of a project poster */
+.ni-mini.is-open,.ni-mini:has(:focus-visible){--o:1}
+@media (hover:hover) and (pointer:fine){.ni-mini:hover{--o:1}}
+.ni-mini__name{width:calc(100% - 52px);height:48px;transform-origin:0 0;transform:scale(calc(1 - .46 * var(--o)));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ni-mini__name svg{display:block;width:100%;height:100%}
+.ni-mini__scope{position:absolute;left:18px;bottom:14px;color:var(--muted);font:400 11px/1.3 var(--font-mono);opacity:calc(1 - var(--o));transition:opacity .2s ease}
+.ni-mini__body{position:absolute;left:18px;right:18px;top:50px;display:flex;flex-direction:column;gap:6px;opacity:var(--o);pointer-events:none;transition:opacity .3s ease}
+.ni-mini.is-open .ni-mini__body,.ni-mini:has(:focus-visible) .ni-mini__body{pointer-events:auto;transition-delay:.12s}
+@media (hover:hover) and (pointer:fine){.ni-mini:hover .ni-mini__body{pointer-events:auto;transition-delay:.12s}}
+.ni-mini__title{margin:0;font:800 15px/1.3 var(--font-display);letter-spacing:-.005em}
+.ni-mini .ni-link{font-size:14px}
+.ni-mini .ni-poster__toggle{top:10px;right:10px;width:40px;height:40px}
+@media (max-width:767px){
+  /* on a phone the cards are a list, and the one that is tapped grows */
+  .ni-mini{min-height:0;padding:11px 14px}
+  .ni-mini__name{height:30px;transform:scale(calc(1 - .2 * var(--o)))}
+  .ni-mini__scope{display:none}
+  .ni-mini__body{position:static;max-height:calc(var(--o) * 110px);margin-top:calc(var(--o) * 2px);overflow:hidden;transition:max-height .35s ease,opacity .3s ease}
+  .ni-mini .ni-poster__toggle{top:6px;right:8px}
+}
+@media (prefers-reduced-motion:reduce){.ni-mini__name,.ni-mini__scope,.ni-mini__body{transition:none}}
+
+/* ---------- Dossier: the third state of a card ---------- */
+/* The card grows to the whole screen and holds the page of its project. The drawn name and the cover move from the card into its head. */
+.ni-poster__actions,.ni-mini__actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.ni-mini__actions{gap:2px 16px}
+.ni-more svg{flex:none;width:16px;height:16px}
+.ni-link.ni-more{display:inline-flex;align-items:center;gap:6px}
+/* while its dossier is open the card is empty: the drawings are in the dossier, and the text comes back when it closes */
+.ni-poster.is-away :is(.ni-poster__scope,.ni-poster__body),.ni-mini.is-away :is(.ni-mini__body,.ni-mini__scope){opacity:0;transition:none}
+.ni-dossier{--pad:var(--space-6);position:fixed;inset:0;box-sizing:border-box;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;background:var(--tint,color-mix(in oklab,var(--ni-accent) 10%,var(--surface)));color:var(--ink);z-index:20}
+.ni-dossier::backdrop{background:transparent}
+.ni-dossier:focus{outline:0}
+html:not(.js) .ni-dossier:target{display:block}   /* without scripts the address alone opens it */
+.ni-dossier__close{position:fixed;top:20px;right:20px;z-index:2;width:44px;height:44px;text-decoration:none}
+.ni-dossier__page{width:min(1080px,100% - 2 * var(--pad));margin:0 auto;padding:var(--space-8) 0 var(--space-9)}
+.ni-dossier__head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-4) var(--space-6);align-items:start}
+.ni-dossier__head > .ni-scope,.ni-dossier__name,.ni-dossier__plain,.ni-dossier__facts,.ni-dossier__head--plain .ni-dossier__text{grid-column:1/-1}
+/* the two places the drawings of the card move into: each is exactly as large as its drawing */
+.ni-dossier__name{width:min(100%,calc(var(--dh,84px) * var(--ar,6)));aspect-ratio:var(--ar,6);margin:var(--space-1) 0 var(--space-2)}
+.ni-dossier__cover{grid-column:2;justify-self:end;width:min(100%,calc(var(--ch,220px) * var(--ar,1.6)));aspect-ratio:var(--ar,1.6)}
+.ni-dossier__name:empty,.ni-dossier__cover:empty{display:none}
+.ni-dossier :is(.ni-poster__name,.ni-poster__cover,.ni-mini__name){position:static;width:100%;height:100%;transform:none;transform-origin:0 0;transition:none}
+.ni-dossier__plain{display:none;margin:0;font:900 48px/1.08 var(--font-display);letter-spacing:-.02em}
+html:not(.js) .ni-dossier__plain{display:block}   /* the name as text, where the drawing cannot move in */
+.ni-dossier__text{grid-column:1;display:flex;flex-direction:column;gap:var(--space-3);min-width:0}
+.ni-dossier__title{margin:0;font:900 30px/1.15 var(--font-display);letter-spacing:-.02em;text-wrap:balance}
+.ni-dossier__lead{max-width:34em;margin:0;font:400 20px/1.5 var(--font-text)}
+.ni-dossier__note{max-width:var(--text-measure);margin:0;color:var(--muted);font:400 15px/1.5 var(--font-text)}
+.ni-dossier__links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
+.ni-dossier__meta{display:flex;flex-direction:column;gap:2px;margin:0;color:var(--muted);font:400 12px/1.5 var(--font-mono)}
+.ni-dossier__meta div{display:flex;flex-wrap:wrap;gap:0 8px}
+.ni-dossier__meta dt::after{content:":"}
+.ni-dossier__meta dd{margin:0;color:var(--ink)}
+.ni-dossier__body > .ni-dossier__sub{margin:var(--space-2) 0 calc(-1 * var(--space-2));font:800 18px/1.3 var(--font-display)}
+.ni-dossier .ni-figure__frame > img{height:auto}
+.ni-dossier__facts{margin-top:var(--space-3);padding:var(--space-5) var(--space-6);border-radius:var(--radius-md);background:var(--surface);box-shadow:var(--shadow-rest)}
+.ni-dossier__sec{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--space-4) var(--grid-gap);margin-top:var(--space-8)}
+.ni-dossier__h{margin:0}
+.ni-dossier__h--text{font:900 30px/1.15 var(--font-display);letter-spacing:-.02em}
+.ni-dossier__words{display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px 14px}
+.ni-dossier__words svg{display:block;flex:none;width:auto;max-width:100%;height:var(--h,44px)}
+.ni-dossier .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ni-dossier__body{display:flex;flex-direction:column;gap:var(--space-4);min-width:0}
+.ni-dossier__body > p{max-width:var(--text-measure);margin:0;font:400 17px/1.6 var(--font-text)}
+.ni-dossier__body > ul{display:flex;flex-direction:column;gap:var(--space-2);max-width:var(--text-measure);margin:0;padding-left:1.15em;font:400 17px/1.55 var(--font-text)}
+.ni-dossier__body li::marker{color:var(--ni-accent,var(--muted))}
+.ni-dossier__body b{font-weight:700}
+.ni-dossier__end{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-5);margin-top:var(--space-8)}
+.ni-dossier .ni-table__note{margin-inline:var(--space-2)}
+/* Flow: a chain of steps. His own steps float, an upstream step is recessed */
+.ni-flow{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0;padding:0;list-style:none}
+.ni-flow__label{margin:var(--space-2) 0 0;color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+.ni-flow__label:first-child{margin-top:0}
+.ni-flow li{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:58px;padding:9px 16px;border-radius:var(--radius-sm);background:var(--surface);box-shadow:var(--shadow-rest);font:700 15px/1.3 var(--font-text)}
+.ni-flow li:not(:last-child)::after{content:"\2192";position:absolute;top:50%;left:calc(100% + 7px);color:var(--muted);font:400 16px/1 var(--font-text);transform:translateY(-50%)}
+.ni-flow small{color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+.ni-flow code{font:400 14px/1.3 var(--font-mono)}
+.ni-flow .is-upstream{background:var(--sunken);box-shadow:none}
+/* a table whose cells are sentences: they wrap, and on a phone every row is a small block */
+.ni-table--prose th,.ni-table--prose td{white-space:normal}
+.ni-table--prose th:first-child,.ni-table--prose td:first-child{min-width:0;white-space:nowrap}
+.ni-table__k{display:none}
+.ni-video.is-playing .ni-video__play{display:none}
+.ni-code__copy.is-done{background:var(--surface)}
+@media (max-width:767px){
+  .ni-dossier{--pad:var(--space-5)}
+  .ni-dossier__close{top:12px;right:12px}
+  .ni-dossier__page{padding:68px 0 var(--space-8)}
+  .ni-dossier__head{grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
+  .ni-dossier__cover{grid-column:1;--ch:120px}
+  .ni-dossier__plain{font-size:34px}
+  .ni-dossier__title,.ni-dossier__h--text{font-size:26px}
+  .ni-dossier__lead{font-size:18px}
+  .ni-dossier__facts{padding:var(--space-5)}
+  .ni-dossier__sec{grid-template-columns:minmax(0,1fr);margin-top:var(--space-7)}
+  .ni-dossier__words svg{height:calc(var(--h,44px) * .8)}
+  .ni-flow{gap:10px 26px}
+  .ni-flow li:not(:last-child)::after{left:calc(100% + 5px)}
+  .ni-table--prose thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ni-table--prose tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+  .ni-table--prose tbody tr:last-child{border-bottom:0}
+  .ni-table--prose th,.ni-table--prose td{display:block;padding:2px 0;border:0}
+  .ni-table--prose th:first-child{color:var(--muted);font:400 12px/1.4 var(--font-mono)}
+  .ni-table--prose td:last-child{font-weight:700}
+  .ni-table__k{display:inline}
+}

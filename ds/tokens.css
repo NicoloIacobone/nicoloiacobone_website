@@ -1,0 +1,188 @@
+/* Nicolò Iacobone design system: tokens. Generated from tokens.json by tools/gen_tokens.py. Do not edit by hand. */
+@font-face { font-family: "Nunito"; src: url("fonts/Nunito-latin-wght.woff2") format("woff2"); font-weight: 200 1000; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito Sans"; src: url("fonts/NunitoSans-latin-wght.woff2") format("woff2"); font-weight: 200 1000; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono-latin-wght.woff2") format("woff2"); font-weight: 100 800; font-style: normal; font-display: swap; }
+
+/* Light is the first theme. The page follows the system setting, and data-theme on <html> overrides it. */
+:root, [data-theme="light"] {
+  --ground: #f3f4f6;
+  --surface: #ffffff;
+  --sunken: #e9ebef;
+  --line: #d8dbe2;
+  --muted: #555b6a;
+  --ink: #14161c;
+  --on-ink: #f3f4f6;
+  --vggt-text: #4b35d6;
+  --vggt-near: var(--vggt-text);
+  --vggt-far: #0b8e93;
+  --mapanything-text: #a31b6f;
+  --openfactory-text: #a8420e;
+  --openfactory-link: #f0661a;
+  --openfactory-link-2: #ff8a3d;
+  --openfactory-joint: var(--ink);
+  --doppelbot-text: #0a6e60;
+  --doppelbot-human: #0b8e7c;
+  --doppelbot-twin: #e0457b;
+  --doppelbot-bone: #8a90a0;
+  --rgbd-text: #3d5a80;
+  --rgbd-near: var(--rgbd-text);
+  --rgbd-far: #9aa3b2;
+  --rubik-text: #765300;
+  --rubik-body: #14161c;
+  --rubik-off: #2a2f3a;
+  --rubik-red: #d9283f;
+  --rubik-orange: #f0801c;
+  --rubik-yellow: #f4cc1f;
+  --rubik-green: #1ba358;
+  --rubik-blue: #2160e0;
+  --rubik-white: #f5f5f1;
+  --fishing-thread: #2b7bb9;
+  --deck-card: #c48a00;
+  --deck-rest: #c9ced8;
+  --pitch-grass: #1f8a4c;
+  --pitch-line: #ffffff;
+  --film-strip: #14161c;
+  --film-frame: #f5f5f1;
+  --film-light: #f4cc1f;
+  --juggle-a: #e5484d;
+  --juggle-b: #f2b01e;
+  --juggle-c: #3b82f6;
+  --board-pcb: #0f5f55;
+  --board-hole: #0a3f39;
+  --led-on: #ff4d4d;
+  --board-wire: #f2b01e;
+  --timeline-a: #7c5cff;
+  --timeline-b: #0f9e90;
+  --travel-visited: #00a0bd;
+  --travel-lived: #d9541e;
+  --travel-land: #c9ced8;
+  --dots-perception: #1583c6;
+  --dots-data: #4f8f1e;
+  --dots-academic: #d2473a;
+  --shadow-float: 0 1px 2px rgba(20,22,28,0.05), 0 18px 44px rgba(30,36,60,0.11);
+  --shadow-rest: 0 1px 2px rgba(20,22,28,0.06), 0 5px 14px rgba(30,36,60,0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0e1014;
+    --surface: #181b22;
+    --sunken: #232730;
+    --line: #2e333e;
+    --muted: #a4a9b6;
+    --ink: #f1f2f5;
+    --on-ink: #0e1014;
+    --vggt-text: #a99bff;
+    --vggt-near: var(--vggt-text);
+    --vggt-far: #5ee0da;
+    --mapanything-text: #ff8fcc;
+    --openfactory-text: #ff9a5c;
+    --openfactory-joint: var(--ink);
+    --doppelbot-text: #5ee0c8;
+    --doppelbot-human: var(--doppelbot-text);
+    --doppelbot-twin: #ff86b0;
+    --doppelbot-bone: #7c8494;
+    --rgbd-text: #a9c1e8;
+    --rgbd-near: var(--rgbd-text);
+    --rgbd-far: #5b6475;
+    --rubik-text: #ffd466;
+    --rubik-body: #05060a;
+    --rubik-off: #1b1f28;
+    --fishing-thread: #7cc0f5;
+    --deck-card: #ffcb45;
+    --deck-rest: #3a4150;
+    --film-strip: #05060a;
+    --board-pcb: #0c4a43;
+    --board-hole: #083630;
+    --timeline-a: #a996ff;
+    --timeline-b: #4fd8c9;
+    --travel-visited: #1fb6d4;
+    --travel-lived: #ff8f5a;
+    --travel-land: #3a4150;
+    --dots-perception: #74c4f5;
+    --dots-data: #a6d86a;
+    --dots-academic: #ff8f7e;
+    --shadow-float: inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 48px rgba(0,0,0,0.55);
+    --shadow-rest: inset 0 1px 0 rgba(255,255,255,0.05), 0 6px 16px rgba(0,0,0,0.45);
+  }
+}
+[data-theme="dark"] {
+  --ground: #0e1014;
+  --surface: #181b22;
+  --sunken: #232730;
+  --line: #2e333e;
+  --muted: #a4a9b6;
+  --ink: #f1f2f5;
+  --on-ink: #0e1014;
+  --vggt-text: #a99bff;
+  --vggt-near: var(--vggt-text);
+  --vggt-far: #5ee0da;
+  --mapanything-text: #ff8fcc;
+  --openfactory-text: #ff9a5c;
+  --openfactory-joint: var(--ink);
+  --doppelbot-text: #5ee0c8;
+  --doppelbot-human: var(--doppelbot-text);
+  --doppelbot-twin: #ff86b0;
+  --doppelbot-bone: #7c8494;
+  --rgbd-text: #a9c1e8;
+  --rgbd-near: var(--rgbd-text);
+  --rgbd-far: #5b6475;
+  --rubik-text: #ffd466;
+  --rubik-body: #05060a;
+  --rubik-off: #1b1f28;
+  --fishing-thread: #7cc0f5;
+  --deck-card: #ffcb45;
+  --deck-rest: #3a4150;
+  --film-strip: #05060a;
+  --board-pcb: #0c4a43;
+  --board-hole: #083630;
+  --timeline-a: #a996ff;
+  --timeline-b: #4fd8c9;
+  --travel-visited: #1fb6d4;
+  --travel-lived: #ff8f5a;
+  --travel-land: #3a4150;
+  --dots-perception: #74c4f5;
+  --dots-data: #a6d86a;
+  --dots-academic: #ff8f7e;
+  --shadow-float: inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 48px rgba(0,0,0,0.55);
+  --shadow-rest: inset 0 1px 0 rgba(255,255,255,0.05), 0 6px 16px rgba(0,0,0,0.45);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 36px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --radius-sm: 16px;
+  --radius-md: 28px;
+  --radius-lg: 44px;
+  --radius-xl: 56px;
+  --radius-full: 999px;
+  --page-max: 1240px;
+  --grid-columns: 12;
+  --grid-gap: 24px;
+  --text-measure: 68ch;
+  --bp-phone: 480px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1100px;
+  --font-display: "Nunito", "Avenir Next", system-ui, sans-serif;
+  --font-text: "Nunito Sans", "Avenir Next", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+/* One class per type style. */
+.display { font-family: var(--font-display); font-size: 76px; line-height: 1.03; font-weight: 900; letter-spacing: -0.025em; }
+.title-1 { font-family: var(--font-display); font-size: 48px; line-height: 1.08; font-weight: 900; letter-spacing: -0.02em; }
+.title-2 { font-family: var(--font-display); font-size: 30px; line-height: 1.15; font-weight: 900; letter-spacing: -0.02em; }
+.title-3 { font-family: var(--font-display); font-size: 22px; line-height: 1.25; font-weight: 800; letter-spacing: -0.01em; }
+.metric { font-family: var(--font-display); font-size: 34px; line-height: 1.1; font-weight: 900; letter-spacing: -0.01em; }
+.lead { font-family: var(--font-text); font-size: 20px; line-height: 1.5; font-weight: 400; }
+.body { font-family: var(--font-text); font-size: 17px; line-height: 1.5; font-weight: 400; }
+.small { font-family: var(--font-text); font-size: 15px; line-height: 1.5; font-weight: 400; }
+.label { font-family: var(--font-text); font-size: 14px; line-height: 1.3; font-weight: 700; }
+.button { font-family: var(--font-text); font-size: 16px; line-height: 1; font-weight: 800; }
+.code { font-family: var(--font-mono); font-size: 14px; line-height: 1.6; font-weight: 400; }
+.unit { font-family: var(--font-mono); font-size: 12px; line-height: 1.4; font-weight: 400; }
