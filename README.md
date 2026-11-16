@@ -52,7 +52,7 @@ favicon.svg                    il monogramma NI
 imgs_and_docs/CV.pdf           curriculum scaricabile
 imgs_and_docs/foto_profilo.jpeg
 privacy.html                   informativa privacy e cookie (IT/EN nel markup)
-rubik/                         ← copiata da doppelbot (web/rubik, `sh web/publish.sh`): non si modifica qui
+rubik/                         ← viene da doppelbot (web/rubik): vedi «Vincoli con rubik/» prima di toccarla
 rubik/vendor/                  OpenCV.js (Apache-2.0) e cubejs (MIT), con le loro licenze
 CNAME                          dominio personalizzato
 CLAUDE.md                      regole per gli agenti, da ../design-system/AGENTS.md
@@ -64,7 +64,7 @@ usa `NI.goStop()` definito dal binario.
 Restano nel repository, ma la home non li usa più:
 
 ```
-css/style.css, fonts/, js/main.js   usati da privacy.html e da rubik/: non si toccano
+css/style.css, fonts/, js/main.js   usati solo da privacy.html
 css/home.css                        stili della home precedente
 js/dossiers.js, js/eggs.js          dossier ed easter egg della home precedente
 js/travels.js, js/world-map-data.js mappa interattiva dei viaggi (non c'è più nella home)
@@ -79,14 +79,19 @@ La pagina `rubik/` usa la fotocamera solo nel browser: le immagini non lasciano 
 
 ### Vincoli con `rubik/` e `privacy.html`
 
-`rubik/` viene sovrascritta da `publish.sh` di doppelbot, ma dipende da questo sito: carica
-`../css/style.css` e `../fonts/inter-latin.woff2`. `privacy.html` carica `css/style.css` e
-`js/main.js`. La home nuova non usa nessuno di questi file. Prima di cambiare `css/style.css`:
+`rubik/` viene da doppelbot (`web/rubik`, copiata da `sh web/publish.sh`), ma dipende da questo
+sito: carica `../ds/tokens.css`, `../ds/components.css` e `../favicon.svg`. La grafica nuova di
+`rubik/` (Nav, pulsanti e footer del design system) è stata fatta qui, nel sito, e **non è ancora
+in doppelbot**: un `publish.sh` lanciato adesso riporterebbe la grafica vecchia, che cerca
+`../css/style.css`. Prima di pubblicare di nuovo da doppelbot, porta lì `rubik/index.html` e
+`rubik/css/rubik.css`.
 
-- I **nomi** dei token e delle classi di nav, bottoni, sezioni e footer non si cambiano; i valori sì.
-- Niente regole globali su `section`, `canvas`, `video`, `svg`, `li`, niente `transform`, `filter` o
-  `contain` su `html`, `body`, `main`, `.wrap`: romperebbero il `position: fixed` della pagina.
-- `rubik/` non carica `main.js`.
+Gli script di `rubik/` cercano `.langswitch__btn`, `#themeToggle` e gli id della pagina: i
+pulsanti della Nav portano entrambe le classi (`ni-lang__btn langswitch__btn`).
+Niente `transform`, `filter` o `contain` su `html`, `body`, `main`, `.wrap`: romperebbero il
+`position: fixed` della modalità a tutto schermo sui telefoni.
+
+`privacy.html` carica ancora `css/style.css`, `fonts/` e `js/main.js`: sono rimasti solo per lei.
 
 Le pagine condividono le chiavi `theme` e `lang` di `localStorage`, quindi tema e lingua scelti
 nella home valgono anche lì.
