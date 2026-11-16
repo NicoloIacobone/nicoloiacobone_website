@@ -63,9 +63,13 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); go(here + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(here - 1); }
   });
-  // a mouse wheel moves the track, unless the card under it still has something to scroll
+  // a mouse wheel moves the track, unless the card under it still has something to scroll.
+  // A sideways gesture (two fingers on a trackpad) belongs to the browser for its whole length: an event in it
+  // that is empty or drifts vertically must not become a scroll of the track, or the two fight and the track jerks.
+  var sideways = -1e9;
   track.addEventListener('wheel', function (e) {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { sideways = e.timeStamp; return; }
+    if (!e.deltaY || e.timeStamp - sideways < 300) return;
     var s = e.target.closest('.stop');
     if (s && s.scrollHeight > s.clientHeight + 1) {
       var up = e.deltaY < 0;
