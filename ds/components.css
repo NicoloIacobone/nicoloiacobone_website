@@ -262,6 +262,8 @@ html:not(.js) .ni-dossier__plain{display:block}   /* the name as text, where the
 .ni-table--prose th:first-child,.ni-table--prose td:first-child{min-width:0;white-space:nowrap}
 .ni-table__k{display:none}
 .ni-video.is-playing .ni-video__play{display:none}
+/* the first frame is a picture that loads only when the dossier is shown; the video lies over it and loads at the first play */
+.ni-video .ni-figure__frame>video{position:absolute;inset:0}
 .ni-code__copy.is-done{background:var(--surface)}
 @media (max-width:767px){
   .ni-dossier{--pad:var(--space-5)}

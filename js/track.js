@@ -1,4 +1,4 @@
-/* The track of the home page: the stops, the bar, the five ways to move, the theme switch, NI.goStop.
+/* The track of the home page: the stops, the bar, the six ways to move, the theme switch, NI.goStop.
    From design-system/examples/home.html. Load before ds/components.js. */
 (function () {
   var root = document.documentElement, track = document.querySelector('.track');
@@ -43,12 +43,13 @@
   track.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; mark(); }); });
   prev.addEventListener('click', function () { go(here - 1); });
   next.addEventListener('click', function () { go(here + 1); });
-  function first(sec) { for (var i = 0; i < stops.length; i++) if (stops[i].getAttribute('data-sec') === sec) return i; return 0; }
+  var OLD = { hero: 'top', projects: 'work', research: 'work', path: 'about' };   // addresses of the old site still lead to their section
+  function first(sec) { sec = OLD[sec] || sec; for (var i = 0; i < stops.length; i++) if (stops[i].getAttribute('data-sec') === sec) return i; return 0; }
   Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); go(first(a.getAttribute('data-go'))); });
   });
   // a click or a tap on a card beside the middle one brings that card to the middle. It does not open the card
-  // or follow its links: that takes a second click, once the card is in the middle. Added on the site, not in the example.
+  // or follow its links: that takes a second click, once the card is in the middle.
   track.addEventListener('click', function (e) {
     if (!e.detail || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // keyboard activation and modified clicks act as usual
     var s = e.target.closest('.stop');
@@ -85,8 +86,7 @@
   });
 
 
-  var OLD = { hero: 'top', projects: 'work', research: 'work', path: 'about' };   // addresses of the old site
-  function fromHash() { if (NI.skipHash) { NI.skipHash = false; return; } var h = location.hash.slice(1); h = OLD[h] || h; if (h && !(NI.isDossier && NI.isDossier(h))) { track.style.scrollBehavior = 'auto'; go(first(h)); track.style.scrollBehavior = ''; } }
+  function fromHash() { if (NI.skipHash) { NI.skipHash = false; return; } var h = location.hash.slice(1); if (h && !(NI.isDossier && NI.isDossier(h))) { track.style.scrollBehavior = 'auto'; go(first(h)); track.style.scrollBehavior = ''; } }
   // bring one stop to the middle at once: a dossier opened from its address needs its card under it
   NI.goStop = function (el) { var i = stops.indexOf(el); if (i < 0) return; track.style.scrollBehavior = 'auto'; go(i); track.style.scrollBehavior = ''; mark(); };
 

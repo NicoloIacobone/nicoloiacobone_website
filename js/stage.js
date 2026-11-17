@@ -24,7 +24,7 @@
   var yaw = 0.8, pitch = 0.6;
   var X = new Float32Array(N), Y = new Float32Array(N), Z = new Float32Array(N + M), K = new Float32Array(N);
   var order = [], col = {}, i, inks = {};
-  function rgb(r, g, b) { var k = r * 65536 + g * 256 + b; return inks[k] || (inks[k] = 'rgb(' + r + ',' + g + ',' + b + ')'); }
+  function rgb(r, g, b) { var k = r * 65536 + g * 256 + b; return inks[k] || (inks[k] = 'rgb(' + r + ',' + g + ',' + b + ')'); }   // a colour string is built once
   for (i = 0; i < N + M; i++) order.push(i);
 
   function readColours() {
@@ -109,6 +109,9 @@
     stage.classList.add('has-moved');
     ask();
   });
+  ['pointerup', 'pointercancel'].forEach(function (t) {
+    stage.addEventListener(t, function () { drag = null; stage.classList.remove('is-dragging'); });
+  });
   // On a touch screen the hero can scroll up and down under the stage (touch-action: pan-y). A drag that starts
   // sideways belongs to the stage until the finger lifts: if the browser took it for a scroll halfway, it would
   // cancel the drag and the stage would turn in jerks. A drag that starts up or down still scrolls the page.
@@ -121,9 +124,6 @@
     if (touch.mine && e.cancelable) e.preventDefault();
   }, { passive: false });
   stage.addEventListener('touchend', function () { touch = null; }, { passive: true });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    stage.addEventListener(t, function () { drag = null; stage.classList.remove('is-dragging'); });
-  });
   stage.addEventListener('keydown', function (e) {
     var k = e.key;
     if (k === 'ArrowLeft') yaw -= 0.14; else if (k === 'ArrowRight') yaw += 0.14;

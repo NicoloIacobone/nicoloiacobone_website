@@ -11,6 +11,9 @@ body{background:var(--ground);overflow:hidden}
 .track::-webkit-scrollbar{display:none}
 .track{--fade:min(12vw,160px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
 .stop{transition:opacity .35s ease}
+/* The skip link: the first stop of the Tab key, hidden until it has focus */
+.skip{position:absolute;top:var(--space-3);left:var(--space-3);z-index:30;display:inline-flex;align-items:center;height:44px;padding:0 var(--space-5);border-radius:var(--radius-full);background:var(--ink);color:var(--on-ink);font:800 16px/1 var(--font-text);text-decoration:none;transform:translateY(calc(-100% - var(--space-4)))}
+.skip:focus{transform:none}
 /* without scripts every card is at full strength, and the controls that need the script are not shown */
 .js .stop:not(.is-here){opacity:.7}
 html:not(.js) :is(.bar,.ni-lang,[data-theme-switch]){display:none}
@@ -83,10 +86,3 @@ html:not(.js) :is(.bar,.ni-lang,[data-theme-switch]){display:none}
   .more__grid{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto;gap:8px}
   .more .sec__title{font-size:24px}
 }
-
-/* Skip link: a site addition, not in the example. Hidden until it takes keyboard focus. */
-.skip{position:absolute;top:var(--space-3);left:var(--space-3);z-index:30;display:inline-flex;align-items:center;height:44px;padding:0 var(--space-5);border-radius:var(--radius-full);background:var(--ink);color:var(--on-ink);font:800 16px/1 var(--font-text);text-decoration:none;transform:translateY(calc(-100% - var(--space-4)))}
-.skip:focus{transform:none}
-
-/* A card beside the middle one is a way to move: a click brings it to the middle. Site addition, see js/track.js. */
-.js .stop:not(.is-here) > *{cursor:pointer}
