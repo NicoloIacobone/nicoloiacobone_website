@@ -28,57 +28,65 @@
 <script type="module" src="js/app.js"></script>
 </head>
 <body class="ni">
+<div class="page">
 
-<header class="top">
-  <nav class="ni-nav" aria-label="Main">
-    <a class="ni-nav__brand" href="../"><span class="brand-dot" aria-hidden="true">NI</span><span class="name">Nicolò Iacobone</span></a>
-    <div class="ni-nav__tools">
-      <div class="ni-lang" role="group" data-i18n-attr="aria-label" data-i18n="a11y.langGroup" aria-label="Lingua">
-        <button type="button" class="ni-lang__btn langswitch__btn" data-lang="it" aria-pressed="true">IT</button>
-        <button type="button" class="ni-lang__btn langswitch__btn" data-lang="en" aria-pressed="false">EN</button>
+<nav class="ni-nav" aria-label="Main">
+  <a class="ni-nav__brand" href="../"><span class="brand-dot" aria-hidden="true">NI</span><span class="name">Nicolò Iacobone</span></a>
+  <div class="ni-nav__tools">
+    <div class="ni-lang" role="group" data-i18n-attr="aria-label" data-i18n="a11y.langGroup" aria-label="Lingua">
+      <button type="button" class="ni-lang__btn langswitch__btn" data-lang="it" aria-pressed="true">IT</button>
+      <button type="button" class="ni-lang__btn langswitch__btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="ni-iconbtn" id="themeToggle" data-i18n-attr="aria-label,title" data-i18n="a11y.theme" aria-label="Cambia tema" title="Cambia tema"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<main class="rubik">
+
+  <!-- Solver head: what the page is, before the camera starts. #intro is hidden as a whole while the camera runs. -->
+  <header class="rk-head" id="intro">
+    <div class="rk-head__text">
+      <p class="ni-scope" data-i18n="intro.kicker">Progetto personale · doppelbot</p>
+      <div class="rk-head__name"><svg viewBox="0 0 456 124" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Rubik"><g style="fill:var(--rubik-body)"><rect x="0" y="0" width="80" height="124" rx="12"/><rect x="94" y="0" width="80" height="124" rx="12"/><rect x="188" y="0" width="80" height="124" rx="12"/><rect x="282" y="0" width="80" height="124" rx="12"/><rect x="376" y="0" width="80" height="124" rx="12"/></g><g style="fill:var(--rubik-off)"><rect x="52.5" y="8.5" width="19" height="19" rx="5"/><rect x="30.5" y="30.5" width="19" height="19" rx="5"/><rect x="52.5" y="52.5" width="19" height="19" rx="5"/><rect x="30.5" y="74.5" width="19" height="19" rx="5"/><rect x="30.5" y="96.5" width="19" height="19" rx="5"/><rect x="124.5" y="8.5" width="19" height="19" rx="5"/><rect x="124.5" y="30.5" width="19" height="19" rx="5"/><rect x="124.5" y="52.5" width="19" height="19" rx="5"/><rect x="124.5" y="74.5" width="19" height="19" rx="5"/><rect x="240.5" y="8.5" width="19" height="19" rx="5"/><rect x="218.5" y="30.5" width="19" height="19" rx="5"/><rect x="240.5" y="52.5" width="19" height="19" rx="5"/><rect x="218.5" y="74.5" width="19" height="19" rx="5"/><rect x="240.5" y="96.5" width="19" height="19" rx="5"/><rect x="290.5" y="30.5" width="19" height="19" rx="5"/><rect x="334.5" y="30.5" width="19" height="19" rx="5"/><rect x="290.5" y="52.5" width="19" height="19" rx="5"/><rect x="334.5" y="52.5" width="19" height="19" rx="5"/><rect x="290.5" y="74.5" width="19" height="19" rx="5"/><rect x="334.5" y="74.5" width="19" height="19" rx="5"/><rect x="406.5" y="8.5" width="19" height="19" rx="5"/><rect x="406.5" y="30.5" width="19" height="19" rx="5"/><rect x="428.5" y="52.5" width="19" height="19" rx="5"/><rect x="406.5" y="74.5" width="19" height="19" rx="5"/><rect x="406.5" y="96.5" width="19" height="19" rx="5"/></g><g style="fill:#d9283f"><rect x="8.5" y="8.5" width="19" height="19" rx="5"/><rect x="30.5" y="8.5" width="19" height="19" rx="5"/><rect x="8.5" y="30.5" width="19" height="19" rx="5"/><rect x="52.5" y="30.5" width="19" height="19" rx="5"/><rect x="8.5" y="52.5" width="19" height="19" rx="5"/><rect x="30.5" y="52.5" width="19" height="19" rx="5"/><rect x="8.5" y="74.5" width="19" height="19" rx="5"/><rect x="52.5" y="74.5" width="19" height="19" rx="5"/><rect x="8.5" y="96.5" width="19" height="19" rx="5"/><rect x="52.5" y="96.5" width="19" height="19" rx="5"/></g><g style="fill:#f0801c"><rect x="102.5" y="8.5" width="19" height="19" rx="5"/><rect x="146.5" y="8.5" width="19" height="19" rx="5"/><rect x="102.5" y="30.5" width="19" height="19" rx="5"/><rect x="146.5" y="30.5" width="19" height="19" rx="5"/><rect x="102.5" y="52.5" width="19" height="19" rx="5"/><rect x="146.5" y="52.5" width="19" height="19" rx="5"/><rect x="102.5" y="74.5" width="19" height="19" rx="5"/><rect x="146.5" y="74.5" width="19" height="19" rx="5"/><rect x="102.5" y="96.5" width="19" height="19" rx="5"/><rect x="124.5" y="96.5" width="19" height="19" rx="5"/><rect x="146.5" y="96.5" width="19" height="19" rx="5"/></g><g style="fill:#f4cc1f"><rect x="196.5" y="8.5" width="19" height="19" rx="5"/><rect x="218.5" y="8.5" width="19" height="19" rx="5"/><rect x="196.5" y="30.5" width="19" height="19" rx="5"/><rect x="240.5" y="30.5" width="19" height="19" rx="5"/><rect x="196.5" y="52.5" width="19" height="19" rx="5"/><rect x="218.5" y="52.5" width="19" height="19" rx="5"/><rect x="196.5" y="74.5" width="19" height="19" rx="5"/><rect x="240.5" y="74.5" width="19" height="19" rx="5"/><rect x="196.5" y="96.5" width="19" height="19" rx="5"/><rect x="218.5" y="96.5" width="19" height="19" rx="5"/></g><g style="fill:#1ba358"><rect x="290.5" y="8.5" width="19" height="19" rx="5"/><rect x="312.5" y="8.5" width="19" height="19" rx="5"/><rect x="334.5" y="8.5" width="19" height="19" rx="5"/><rect x="312.5" y="30.5" width="19" height="19" rx="5"/><rect x="312.5" y="52.5" width="19" height="19" rx="5"/><rect x="312.5" y="74.5" width="19" height="19" rx="5"/><rect x="290.5" y="96.5" width="19" height="19" rx="5"/><rect x="312.5" y="96.5" width="19" height="19" rx="5"/><rect x="334.5" y="96.5" width="19" height="19" rx="5"/></g><g style="fill:#2160e0"><rect x="384.5" y="8.5" width="19" height="19" rx="5"/><rect x="428.5" y="8.5" width="19" height="19" rx="5"/><rect x="384.5" y="30.5" width="19" height="19" rx="5"/><rect x="428.5" y="30.5" width="19" height="19" rx="5"/><rect x="384.5" y="52.5" width="19" height="19" rx="5"/><rect x="406.5" y="52.5" width="19" height="19" rx="5"/><rect x="384.5" y="74.5" width="19" height="19" rx="5"/><rect x="428.5" y="74.5" width="19" height="19" rx="5"/><rect x="384.5" y="96.5" width="19" height="19" rx="5"/><rect x="428.5" y="96.5" width="19" height="19" rx="5"/></g></svg></div>
+      <h1 class="rk-head__title" data-i18n="intro.title">Risolvi il cubo di Rubik con la fotocamera</h1>
+      <p class="rk-head__lead" data-i18n="intro.lead">Mostra alla fotocamera le sei facce del cubo, in qualsiasi ordine: la pagina le riconosce, ricostruisce il cubo e ti guida alla soluzione una mossa alla volta.</p>
+      <ol class="rk-steps">
+        <li data-i18n="intro.step1">Avvia la fotocamera e tieni il cubo ben illuminato.</li>
+        <li data-i18n="intro.step2">Mostra una faccia alla volta e tienila ferma finché il riquadro diventa verde.</li>
+        <li data-i18n="intro.step3">Dopo la sesta faccia segui le mosse, dal tuo punto di vista.</li>
+      </ol>
+      <div class="rk-actions">
+        <button type="button" class="ni-btn ni-btn--primary" id="startButton" data-i18n="intro.start">Avvia la fotocamera</button>
       </div>
-      <button type="button" class="ni-iconbtn" id="themeToggle" data-i18n-attr="aria-label,title" data-i18n="a11y.theme" aria-label="Cambia tema" title="Cambia tema"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg></button>
+      <p class="ni-chip rk-privacy"><span class="ni-chip__dot" aria-hidden="true"></span><span data-i18n="intro.privacy">Le immagini restano sul tuo dispositivo: niente viene inviato né salvato.</span></p>
+      <p class="rk-load" id="loadStatus" role="status" aria-live="polite"></p>
+      <noscript><p class="rk-load is-error">Serve JavaScript. / JavaScript is required.</p></noscript>
+      <p class="rk-small" data-i18n="intro.note">Funziona con i cubi con gli adesivi su plastica nera, come il Rubik's originale, con quelli come il mio, con l'interno delle caselle scuro, e con i cubi senza adesivi (stickerless).</p>
     </div>
-  </nav>
-</header>
+    <figure class="rk-head__cover">
+      <svg viewBox="82 70 236 232" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><polygon points="200.0,88.0 288.3,139.0 288.3,241.0 200.0,292.0 111.7,241.0 111.7,139.0" style="fill:var(--rubik-body);stroke:var(--rubik-body);stroke-width:14;stroke-linejoin:round"/><g style="fill:#f0801c;stroke:#f0801c;stroke-width:5;stroke-linejoin:round"><polygon points="200.0,92.4 221.8,105.0 200.0,117.6 178.2,105.0"/><polygon points="229.4,109.4 251.2,122.0 229.4,134.6 207.7,122.0"/><polygon points="225.6,272.8 203.8,285.4 203.8,260.2 225.6,247.6"/><polygon points="225.6,238.8 203.8,251.4 203.8,226.2 225.6,213.6"/><polygon points="174.4,272.8 196.2,285.4 196.2,260.2 174.4,247.6"/><polygon points="174.4,238.8 196.2,251.4 196.2,226.2 174.4,213.6"/></g><g style="fill:#2160e0;stroke:#2160e0;stroke-width:5;stroke-linejoin:round"><polygon points="170.6,109.4 192.3,122.0 170.6,134.6 148.8,122.0"/><polygon points="141.1,126.4 162.9,139.0 141.1,151.6 119.3,139.0"/><polygon points="170.6,143.4 192.3,156.0 170.6,168.6 148.8,156.0"/><polygon points="200.0,160.4 221.8,173.0 200.0,185.6 178.2,173.0"/><polygon points="284.5,204.8 262.7,217.4 262.7,192.2 284.5,179.6"/><polygon points="255.1,187.8 233.3,200.4 233.3,175.2 255.1,162.6"/><polygon points="115.5,204.8 137.3,217.4 137.3,192.2 115.5,179.6"/><polygon points="115.5,170.8 137.3,183.4 137.3,158.2 115.5,145.6"/></g><g style="fill:#f4cc1f;stroke:#f4cc1f;stroke-width:5;stroke-linejoin:round"><polygon points="200.0,126.4 221.8,139.0 200.0,151.6 178.2,139.0"/><polygon points="255.1,221.8 233.3,234.4 233.3,209.2 255.1,196.6"/></g><g style="fill:#1ba358;stroke:#1ba358;stroke-width:5;stroke-linejoin:round"><polygon points="258.9,126.4 280.7,139.0 258.9,151.6 237.1,139.0"/><polygon points="255.1,255.8 233.3,268.4 233.3,243.2 255.1,230.6"/><polygon points="115.5,238.8 137.3,251.4 137.3,226.2 115.5,213.6"/><polygon points="144.9,255.8 166.7,268.4 166.7,243.2 144.9,230.6"/><polygon points="144.9,221.8 166.7,234.4 166.7,209.2 144.9,196.6"/></g><g style="fill:#f5f5f1;stroke:#f5f5f1;stroke-width:5;stroke-linejoin:round"><polygon points="229.4,143.4 251.2,156.0 229.4,168.6 207.7,156.0"/><polygon points="225.6,204.8 203.8,217.4 203.8,192.2 225.6,179.6"/><polygon points="144.9,187.8 166.7,200.4 166.7,175.2 144.9,162.6"/><polygon points="174.4,204.8 196.2,217.4 196.2,192.2 174.4,179.6"/></g><g style="fill:#d9283f;stroke:#d9283f;stroke-width:5;stroke-linejoin:round"><polygon points="284.5,238.8 262.7,251.4 262.7,226.2 284.5,213.6"/><polygon points="284.5,170.8 262.7,183.4 262.7,158.2 284.5,145.6"/></g></svg>
+      <figcaption class="rk-note" data-i18n="intro.cover">Illustrazione, non dati</figcaption>
+    </figure>
+  </header>
 
-<main class="wrap rubik">
+  <!-- The video is only a source: it stays in the page (Safari does not update a video that is removed or display:none). -->
+  <video class="rk-source" id="video" playsinline muted aria-hidden="true"></video>
 
-  <section class="rubik__intro" id="intro">
-    <p class="section__kicker ni-scope" data-i18n="intro.kicker">Progetto personale · doppelbot</p>
-    <h1 class="rubik__title" data-i18n="intro.title">Risolvi il cubo di Rubik con la fotocamera</h1>
-    <p class="section__lead" data-i18n="intro.lead">Mostra alla fotocamera le sei facce del cubo, in qualsiasi ordine: la pagina le riconosce, ricostruisce il cubo e ti guida alla soluzione una mossa alla volta.</p>
-    <ol class="rubik__steps">
-      <li data-i18n="intro.step1">Avvia la fotocamera e tieni il cubo ben illuminato.</li>
-      <li data-i18n="intro.step2">Mostra una faccia alla volta e tienila ferma finché il riquadro diventa verde.</li>
-      <li data-i18n="intro.step3">Dopo la sesta faccia segui le mosse, dal tuo punto di vista.</li>
-    </ol>
-    <p class="rubik__note" data-i18n="intro.note">Funziona con i cubi con gli adesivi su plastica nera, come il Rubik's originale, con quelli come il mio, con l'interno delle caselle scuro, e con i cubi senza adesivi (stickerless).</p>
-    <p class="rubik__privacy" data-i18n="intro.privacy">Le immagini restano sul tuo dispositivo: niente viene inviato né salvato.</p>
-    <div class="rubik__actions">
-      <button type="button" class="ni-btn ni-btn--primary" id="startButton" data-i18n="intro.start">Avvia la fotocamera</button>
-    </div>
-    <p class="rubik__load" id="loadStatus" role="status" aria-live="polite"></p>
-    <noscript><p class="rubik__load is-error">Serve JavaScript. / JavaScript is required.</p></noscript>
-  </section>
-
-  <!-- Sorgente nascosta: si vede il canvas con il fotogramma analizzato e la griglia disegnata sopra. -->
-  <video class="rubik__source" id="video" playsinline muted aria-hidden="true"></video>
-
-  <section class="rubik__app rubik__screen" id="scanSection" hidden>
-    <div class="rubik__stage is-mirrored" id="stage">
-      <canvas id="view" aria-hidden="true"></canvas>
-    </div>
-    <div class="rubik__panel rubik__panel--scan">
-      <h2 class="rubik__subtitle" data-i18n="scan.title">Scansione</h2>
-      <div class="rubik__messages">
-        <p class="rubik__status" id="scanMain" role="status" aria-live="polite"></p>
-        <p class="rubik__hint" id="scanHint"></p>
-        <p class="rubik__hint" id="scanWarn" hidden></p>
-        <p class="rubik__event" id="scanEvent" hidden></p>
+  <!-- Solver screen: the camera on the left, what to do on the right. app.js moves #stage between the two screens. -->
+  <section class="rk-screen rk-screen--scan rubik__screen" id="scanSection" hidden>
+    <figure class="ni-figure rk-camera is-mirrored" id="stage">
+      <div class="ni-figure__frame"><canvas id="view" aria-hidden="true"></canvas></div>
+    </figure>
+    <div class="rk-panel">
+      <h2 class="rk-title"><span class="rk-sr" data-i18n="scan.title">Scansione</span><span class="rk-title__words only-it"><svg aria-hidden="true" viewBox="0 0 832 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/><rect x="376" width="80" height="124" rx="12"/><rect x="470" width="80" height="124" rx="12"/><rect x="564" width="80" height="124" rx="12"/><rect x="658" width="80" height="124" rx="12"/><rect x="752" width="80" height="124" rx="12"/></g><path d="M18 18h0M40 40h0M62 40h0M18 62h0M62 62h0M18 84h0M40 84h0M62 106h0M112 18h0M134 40h0M156 40h0M134 62h0M156 62h0M134 84h0M156 84h0M112 106h0M206 18h0M250 18h0M228 40h0M228 84h0M228 106h0M344 18h0M322 40h0M322 62h0M322 84h0M322 106h0M394 18h0M416 40h0M438 40h0M394 62h0M438 62h0M394 84h0M416 84h0M438 106h0M488 40h0M532 40h0M488 62h0M532 62h0M488 84h0M532 84h0M582 18h0M626 18h0M604 40h0M604 62h0M604 84h0M582 106h0M626 106h0M720 18h0M698 40h0M698 62h0M698 84h0M698 106h0M792 40h0M814 40h0M814 62h0M792 84h0M814 84h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M40 18h0M62 18h0M18 40h0M40 62h0M62 84h0M18 106h0M40 106h0M604 18h0M582 40h0M626 40h0M582 62h0M626 62h0M582 84h0M626 84h0M604 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M156 18h0M112 40h0M112 62h0M112 84h0M134 106h0M156 106h0M676 18h0M698 18h0M676 40h0M720 40h0M676 62h0M720 62h0M676 84h0M720 84h0M676 106h0M720 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M228 18h0M206 40h0M250 40h0M206 62h0M228 62h0M250 62h0M206 84h0M250 84h0M206 106h0M250 106h0M770 18h0M792 18h0M814 18h0M770 40h0M770 62h0M792 62h0M770 84h0M770 106h0M792 106h0M814 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M322 18h0M300 40h0M344 40h0M300 62h0M344 62h0M300 84h0M344 84h0M300 106h0M344 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/><path d="M416 18h0M438 18h0M394 40h0M416 62h0M438 84h0M394 106h0M416 106h0" style="stroke:var(--rubik-blue);stroke-width:19.0;stroke-linecap:square"/><path d="M488 18h0M510 18h0M532 18h0M510 40h0M510 62h0M510 84h0M488 106h0M510 106h0M532 106h0" style="stroke:var(--rubik-white);stroke-width:19.0;stroke-linecap:square"/></svg></span><span class="rk-title__words only-en"><svg aria-hidden="true" viewBox="0 0 362 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/></g><path d="M18 18h0M40 40h0M62 40h0M18 62h0M62 62h0M18 84h0M40 84h0M62 106h0M112 18h0M134 40h0M156 40h0M134 62h0M156 62h0M134 84h0M156 84h0M112 106h0M206 18h0M250 18h0M228 40h0M228 84h0M228 106h0M344 18h0M322 40h0M322 62h0M322 84h0M322 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M40 18h0M62 18h0M18 40h0M40 62h0M62 84h0M18 106h0M40 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M156 18h0M112 40h0M112 62h0M112 84h0M134 106h0M156 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M228 18h0M206 40h0M250 40h0M206 62h0M228 62h0M250 62h0M206 84h0M250 84h0M206 106h0M250 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M322 18h0M300 40h0M344 40h0M300 62h0M344 62h0M300 84h0M344 84h0M300 106h0M344 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/></svg></span></h2>
+      <div class="rk-messages">
+        <p class="rk-status" id="scanMain" role="status" aria-live="polite"></p>
+        <p class="rk-hint" id="scanHint"></p>
+        <p class="rk-hint" id="scanWarn" hidden></p>
+        <p class="rk-event" id="scanEvent" hidden></p>
       </div>
       <div class="net" id="net" role="img" data-i18n-attr="aria-label" data-i18n="scan.net" aria-label="Facce acquisite"></div>
-      <div class="rubik__actions">
+      <div class="rk-actions">
         <button type="button" class="ni-btn ni-btn--secondary" id="restartButton" data-i18n="scan.restart">Ricomincia</button>
         <button type="button" class="ni-btn ni-btn--secondary" id="switchButton" data-i18n="scan.switch" hidden>Cambia fotocamera</button>
         <button type="button" class="ni-btn ni-btn--secondary" data-exit data-i18n="app.exit">Esci</button>
@@ -86,57 +94,59 @@
     </div>
   </section>
 
-  <section class="rubik__guide rubik__screen" id="guideSection" hidden>
-    <div class="rubik__guidehead">
-      <h2 class="rubik__subtitle" data-i18n="guide.title">Soluzione</h2>
-      <p class="rubik__hint" data-i18n="guide.hold">Tieni il cubo con il verde verso di te e il bianco in alto: la fotocamera vede la faccia blu.</p>
-      <p class="rubik__status" id="guideStatus" role="status" aria-live="polite" hidden></p>
+  <section class="rk-screen rk-screen--guide rubik__screen" id="guideSection" hidden>
+    <div class="rk-cameracol" id="guideStage">
+      <p class="rk-hint" id="guideCamera" hidden></p>
     </div>
 
-    <div class="rubik__app">
-      <div class="rubik__camera" id="guideStage">
-        <p class="rubik__hint" id="guideCamera" hidden></p>
-      </div>
+    <div class="rk-panel">
+      <h2 class="rk-title"><span class="rk-sr" data-i18n="guide.title">Soluzione</span><span class="rk-title__words only-it"><svg aria-hidden="true" viewBox="0 0 832 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/><rect x="376" width="80" height="124" rx="12"/><rect x="470" width="80" height="124" rx="12"/><rect x="564" width="80" height="124" rx="12"/><rect x="658" width="80" height="124" rx="12"/><rect x="752" width="80" height="124" rx="12"/></g><path d="M18 18h0M40 40h0M62 40h0M18 62h0M62 62h0M18 84h0M40 84h0M62 106h0M112 18h0M156 18h0M134 40h0M134 62h0M134 84h0M112 106h0M156 106h0M228 18h0M250 18h0M228 40h0M250 40h0M228 62h0M250 62h0M228 84h0M250 84h0M322 18h0M322 40h0M322 62h0M322 84h0M394 40h0M416 40h0M394 62h0M438 62h0M416 84h0M438 84h0M488 40h0M532 40h0M488 62h0M532 62h0M488 84h0M532 84h0M582 18h0M626 18h0M604 40h0M604 62h0M604 84h0M582 106h0M626 106h0M720 18h0M698 40h0M698 62h0M698 84h0M698 106h0M792 40h0M814 40h0M814 62h0M792 84h0M814 84h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M40 18h0M62 18h0M18 40h0M40 62h0M62 84h0M18 106h0M40 106h0M604 18h0M582 40h0M626 40h0M582 62h0M626 62h0M582 84h0M626 84h0M604 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M134 106h0M676 18h0M698 18h0M676 40h0M720 40h0M676 62h0M720 62h0M676 84h0M720 84h0M676 106h0M720 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M206 40h0M206 62h0M206 84h0M206 106h0M228 106h0M250 106h0M770 18h0M792 18h0M814 18h0M770 40h0M770 62h0M792 62h0M770 84h0M770 106h0M792 106h0M814 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M344 18h0M300 40h0M344 40h0M300 62h0M344 62h0M300 84h0M344 84h0M300 106h0M322 106h0M344 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/><path d="M394 18h0M416 18h0M438 18h0M438 40h0M416 62h0M394 84h0M394 106h0M416 106h0M438 106h0" style="stroke:var(--rubik-blue);stroke-width:19.0;stroke-linecap:square"/><path d="M488 18h0M510 18h0M532 18h0M510 40h0M510 62h0M510 84h0M488 106h0M510 106h0M532 106h0" style="stroke:var(--rubik-white);stroke-width:19.0;stroke-linecap:square"/></svg></span><span class="rk-title__words only-en"><svg aria-hidden="true" viewBox="0 0 738 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/><rect x="376" width="80" height="124" rx="12"/><rect x="470" width="80" height="124" rx="12"/><rect x="564" width="80" height="124" rx="12"/><rect x="658" width="80" height="124" rx="12"/></g><path d="M18 18h0M40 40h0M62 40h0M18 62h0M62 62h0M18 84h0M40 84h0M62 106h0M112 18h0M156 18h0M134 40h0M134 62h0M134 84h0M112 106h0M156 106h0M228 18h0M250 18h0M228 40h0M250 40h0M228 62h0M250 62h0M228 84h0M250 84h0M322 18h0M322 40h0M322 62h0M322 84h0M394 40h0M438 40h0M394 62h0M438 62h0M394 84h0M438 84h0M394 106h0M438 106h0M488 40h0M532 40h0M488 62h0M532 62h0M488 84h0M532 84h0M582 18h0M626 18h0M604 40h0M604 62h0M604 84h0M582 106h0M626 106h0M720 18h0M698 40h0M698 62h0M698 84h0M698 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M40 18h0M62 18h0M18 40h0M40 62h0M62 84h0M18 106h0M40 106h0M604 18h0M582 40h0M626 40h0M582 62h0M626 62h0M582 84h0M626 84h0M604 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M134 106h0M676 18h0M698 18h0M676 40h0M720 40h0M676 62h0M720 62h0M676 84h0M720 84h0M676 106h0M720 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M206 40h0M206 62h0M206 84h0M206 106h0M228 106h0M250 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M344 18h0M300 40h0M344 40h0M300 62h0M344 62h0M300 84h0M344 84h0M300 106h0M322 106h0M344 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/><path d="M394 18h0M416 18h0M438 18h0M416 40h0M416 62h0M416 84h0M416 106h0" style="stroke:var(--rubik-blue);stroke-width:19.0;stroke-linecap:square"/><path d="M488 18h0M510 18h0M532 18h0M510 40h0M510 62h0M510 84h0M488 106h0M510 106h0M532 106h0" style="stroke:var(--rubik-white);stroke-width:19.0;stroke-linecap:square"/></svg></span></h2>
+      <p class="rk-hint" data-i18n="guide.hold">Tieni il cubo con il verde verso di te e il bianco in alto: la fotocamera vede la faccia blu.</p>
+      <p class="rk-status" id="guideStatus" role="status" aria-live="polite" hidden></p>
 
-      <div class="rubik__panel">
-        <div class="move" id="currentMove">
-          <svg class="move__icon" id="moveIcon" viewBox="-2.3 -2.3 4.6 4.6" aria-hidden="true">
+      <!-- The move -->
+      <div class="rk-current" id="currentMove">
+        <div class="rk-move">
+          <svg class="rk-move__icon" id="moveIcon" viewBox="-2.3 -2.3 4.6 4.6" aria-hidden="true">
             <defs>
               <marker id="arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
                 <path d="M0 0 L10 5 L0 10 z" fill="#ffff00" stroke="#000" stroke-width="1"/>
               </marker>
             </defs>
           </svg>
-          <div class="move__text">
-            <p class="move__label" data-i18n="guide.next">Prossima mossa</p>
-            <p class="move__name" id="moveName" aria-live="polite"></p>
-            <p class="move__description" id="moveText"></p>
-            <p class="move__count" id="moveCount"></p>
+          <div class="rk-move__text">
+            <p class="ni-scope" data-i18n="guide.next">Prossima mossa</p>
+            <p class="rk-move__name" id="moveName" aria-live="polite"></p>
+            <p class="rk-move__description" id="moveText"></p>
           </div>
         </div>
-
-        <div class="rubik__solved" id="solved" hidden>
-          <p class="move__name" data-i18n="guide.solved">Cubo risolto!</p>
-          <p data-i18n="guide.solvedText">Ottimo lavoro. Puoi mischiarlo e ricominciare con una nuova scansione.</p>
+        <div class="rk-progress">
+          <p class="rk-move__count" id="moveCount"></p>
         </div>
-
-        <p class="rubik__event" id="guideEvent" hidden></p>
-        <div class="rubik__actions">
-          <button type="button" class="ni-btn ni-btn--primary" id="doneButton" data-i18n="guide.done">Fatto</button>
-          <button type="button" class="ni-btn ni-btn--secondary" id="undoButton" data-i18n="guide.undo">Annulla l'ultima</button>
-          <button type="button" class="ni-btn ni-btn--secondary" id="modeButton">Conferma a mano</button>
-          <button type="button" class="ni-btn ni-btn--secondary" id="rescanButton" data-i18n="guide.rescan">Nuova scansione</button>
-          <button type="button" class="ni-btn ni-btn--secondary" data-exit data-i18n="app.exit">Esci</button>
-        </div>
-        <p class="rubik__keys" data-i18n="guide.keys">Tasti: Spazio = fatto, Z = annulla, M = conferma automatica o a mano</p>
-        <ol class="moves" id="moveList"></ol>
       </div>
+
+      <div class="rk-solved" id="solved" hidden>
+        <p class="rk-move__name" data-i18n="guide.solved">Cubo risolto!</p>
+        <p data-i18n="guide.solvedText">Ottimo lavoro. Puoi mischiarlo e ricominciare con una nuova scansione.</p>
+      </div>
+
+      <p class="rk-event" id="guideEvent" hidden></p>
+      <div class="rk-actions">
+        <button type="button" class="ni-btn ni-btn--primary" id="doneButton" data-i18n="guide.done">Fatto</button>
+        <button type="button" class="ni-btn ni-btn--secondary" id="undoButton" data-i18n="guide.undo">Annulla l'ultima</button>
+        <button type="button" class="ni-btn ni-btn--secondary" id="modeButton">Conferma a mano</button>
+        <button type="button" class="ni-btn ni-btn--secondary" id="rescanButton" data-i18n="guide.rescan">Nuova scansione</button>
+        <button type="button" class="ni-btn ni-btn--secondary" data-exit data-i18n="app.exit">Esci</button>
+      </div>
+      <p class="rk-keys" data-i18n="guide.keys">Tasti: Spazio = fatto, Z = annulla, M = conferma automatica o a mano</p>
+      <ol class="rk-moves" id="moveList"></ol>
     </div>
   </section>
 
-  <section class="rubik__about">
-    <h2 class="rubik__subtitle" data-i18n="about.title">Come funziona</h2>
-    <ul class="rubik__list">
+  <!-- How it works -->
+  <section class="rk-about">
+    <h2 class="rk-title"><span class="rk-sr" data-i18n="about.title">Come funziona</span><span class="rk-title__words only-it"><svg aria-hidden="true" viewBox="0 0 362 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/></g><path d="M18 18h0M40 40h0M62 40h0M40 62h0M62 62h0M40 84h0M62 84h0M18 106h0M112 18h0M156 18h0M134 40h0M134 62h0M134 84h0M112 106h0M156 106h0M228 18h0M228 84h0M228 106h0M322 40h0M344 40h0M344 62h0M322 84h0M344 84h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M40 18h0M62 18h0M18 40h0M18 62h0M18 84h0M40 106h0M62 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M134 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M250 18h0M206 40h0M228 40h0M250 40h0M206 62h0M228 62h0M250 62h0M206 84h0M250 84h0M206 106h0M250 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M322 18h0M344 18h0M300 40h0M300 62h0M322 62h0M300 84h0M300 106h0M322 106h0M344 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/></svg><svg aria-hidden="true" viewBox="0 0 738 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/><rect x="376" width="80" height="124" rx="12"/><rect x="470" width="80" height="124" rx="12"/><rect x="564" width="80" height="124" rx="12"/><rect x="658" width="80" height="124" rx="12"/></g><path d="M40 40h0M62 40h0M62 62h0M40 84h0M62 84h0M40 106h0M62 106h0M134 18h0M134 40h0M134 62h0M134 84h0M250 18h0M228 40h0M228 62h0M228 84h0M228 106h0M300 40h0M322 40h0M300 62h0M344 62h0M322 84h0M344 84h0M394 40h0M438 40h0M394 62h0M438 62h0M394 84h0M438 84h0M488 18h0M532 18h0M510 40h0M510 62h0M510 84h0M488 106h0M532 106h0M626 18h0M604 40h0M604 62h0M604 84h0M604 106h0M676 18h0M720 18h0M698 40h0M698 84h0M698 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M18 18h0M40 18h0M62 18h0M18 40h0M18 62h0M40 62h0M18 84h0M18 106h0M582 18h0M604 18h0M582 40h0M626 40h0M582 62h0M626 62h0M582 84h0M626 84h0M582 106h0M626 106h0" style="stroke:var(--rubik-blue);stroke-width:19.0;stroke-linecap:square"/><path d="M112 18h0M156 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M112 106h0M134 106h0M156 106h0M698 18h0M676 40h0M720 40h0M676 62h0M698 62h0M720 62h0M676 84h0M720 84h0M676 106h0M720 106h0" style="stroke:var(--rubik-white);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M228 18h0M206 40h0M250 40h0M206 62h0M250 62h0M206 84h0M250 84h0M206 106h0M250 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M322 18h0M344 18h0M344 40h0M322 62h0M300 84h0M300 106h0M322 106h0M344 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M394 18h0M416 18h0M438 18h0M416 40h0M416 62h0M416 84h0M394 106h0M416 106h0M438 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M510 18h0M488 40h0M532 40h0M488 62h0M532 62h0M488 84h0M532 84h0M510 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/></svg></span><span class="rk-title__words only-en"><svg aria-hidden="true" viewBox="0 0 268 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/></g><path d="M40 18h0M40 40h0M40 84h0M40 106h0M112 18h0M156 18h0M134 40h0M134 62h0M134 84h0M112 106h0M156 106h0M228 18h0M228 40h0M228 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M18 18h0M62 18h0M18 40h0M62 40h0M18 62h0M40 62h0M62 62h0M18 84h0M62 84h0M18 106h0M62 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M134 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M250 18h0M206 40h0M250 40h0M206 62h0M228 62h0M250 62h0M206 84h0M228 84h0M250 84h0M206 106h0M250 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/></svg><svg aria-hidden="true" viewBox="0 0 174 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/></g><path d="M18 40h0M62 40h0M18 62h0M62 62h0M18 84h0M62 84h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M112 106h0M156 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M18 18h0M40 18h0M62 18h0M40 40h0M40 62h0M40 84h0M18 106h0M40 106h0M62 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/><path d="M112 18h0M134 18h0M156 18h0M134 40h0M134 62h0M134 84h0M134 106h0" style="stroke:var(--rubik-blue);stroke-width:19.0;stroke-linecap:square"/></svg><svg aria-hidden="true" viewBox="0 0 456 124" fill="none"><g style="fill:var(--rubik-body)"><rect x="0" width="80" height="124" rx="12"/><rect x="94" width="80" height="124" rx="12"/><rect x="188" width="80" height="124" rx="12"/><rect x="282" width="80" height="124" rx="12"/><rect x="376" width="80" height="124" rx="12"/></g><path d="M40 18h0M40 40h0M40 106h0M112 18h0M156 18h0M134 40h0M134 62h0M134 84h0M112 106h0M156 106h0M250 18h0M228 40h0M250 62h0M228 84h0M228 106h0M322 18h0M322 40h0M344 62h0M322 84h0M322 106h0M394 18h0M416 40h0M438 40h0M394 62h0M438 62h0M394 84h0M416 84h0M438 106h0" style="stroke:var(--rubik-off);stroke-width:19.0;stroke-linecap:square"/><path d="M18 18h0M62 18h0M18 40h0M62 40h0M18 62h0M40 62h0M62 62h0M18 84h0M40 84h0M62 84h0M18 106h0M62 106h0" style="stroke:var(--rubik-white);stroke-width:19.0;stroke-linecap:square"/><path d="M134 18h0M112 40h0M156 40h0M112 62h0M156 62h0M112 84h0M156 84h0M134 106h0" style="stroke:var(--rubik-red);stroke-width:19.0;stroke-linecap:square"/><path d="M206 18h0M228 18h0M206 40h0M250 40h0M206 62h0M228 62h0M206 84h0M250 84h0M206 106h0M250 106h0" style="stroke:var(--rubik-orange);stroke-width:19.0;stroke-linecap:square"/><path d="M300 18h0M344 18h0M300 40h0M344 40h0M300 62h0M322 62h0M300 84h0M344 84h0M300 106h0M344 106h0" style="stroke:var(--rubik-yellow);stroke-width:19.0;stroke-linecap:square"/><path d="M416 18h0M438 18h0M394 40h0M416 62h0M438 84h0M394 106h0M416 106h0" style="stroke:var(--rubik-green);stroke-width:19.0;stroke-linecap:square"/></svg></span></h2>
+    <ul class="rk-about__list">
       <li data-i18n="about.vision">Visione: la pagina cerca macchie quasi quadrate disposte a griglia 3×3: gli interni scuri delle caselle o, nel cubo classico, gli adesivi chiari separati dal nero. Il colore di ogni casella si legge dai suoi pixel; il riferimento sono i centri del cubo stesso, così si adatta alla luce della stanza.</li>
       <li data-i18n="about.state">Stato: le facce si riconoscono dal centro; la rotazione di ognuna è l'unica che rende il cubo risolvibile.</li>
       <li data-i18n="about.solver">Soluzione: algoritmo two-phase di Kociemba, al massimo 22 mosse, calcolato nel browser.</li>
@@ -146,15 +156,16 @@
   </section>
 </main>
 
-<footer class="wrap rubik__foot">
-  <div class="ni-footer">
-    <p class="footer__copy">© 2026 Nicolò Iacobone</p>
-    <ul class="ni-footer__links">
-      <li><a class="ni-link" href="../privacy.html" data-i18n="footer.privacy">Privacy</a></li>
-      <li><a class="ni-link" href="../" data-i18n="footer.back">Torna al sito</a></li>
-    </ul>
-  </div>
+<!-- The footer is in English on both pages (Nicolò, 2026-11-17): no data-i18n here. -->
+<footer class="ni-footer rk-foot" lang="en">
+  <div class="ni-footer__brand">© 2026 Nicolò Iacobone</div>
+  <ul class="ni-footer__links">
+    <li><a class="ni-link" href="../privacy.html">Privacy</a></li>
+    <li><a class="ni-link" href="../">Back to the site</a></li>
+  </ul>
+  <p class="ni-footer__note">No cookies. No trackers. Fonts are served from this site.</p>
 </footer>
 
+</div>
 </body>
 </html>
