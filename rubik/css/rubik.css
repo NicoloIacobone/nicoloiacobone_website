@@ -112,10 +112,11 @@ button { font: inherit; color: inherit; }
 
 /* ---------- The move ---------- */
 .rk-current { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; }
-.rk-move { display: grid; grid-template-columns: 104px 1fr; gap: var(--space-4); align-items: center; width: 100%; }
-.rk-move__icon { display: block; width: 104px; height: 104px; border-radius: var(--radius-sm); background: var(--rubik-body); }
-/* the layer that turns: lit stickers with a yellow edge; the arrows yellow, outlined in dark plastic */
-.icon__layer { stroke: var(--rubik-yellow); stroke-width: .05; stroke-linejoin: round; }
+/* the icon is 168px wide, 84px on phones (docs/rubik-solver.md) */
+.rk-move { display: grid; grid-template-columns: 168px 1fr; gap: var(--space-4); align-items: center; width: 100%; }
+.rk-move__icon { display: block; width: 168px; height: 168px; border-radius: var(--radius-sm); background: var(--rubik-body); }
+/* the layer that turns has a white border; the arrows are yellow, outlined in dark plastic */
+.icon__layer { stroke: var(--rubik-white); stroke-width: .06; stroke-linejoin: round; }
 .icon__arrow-edge { stroke: var(--rubik-body); stroke-width: .19; stroke-linecap: round; }
 .icon__arrow { stroke: var(--rubik-yellow); stroke-width: .09; stroke-linecap: round; }
 .rk-strip { display: block; flex: 0 1 auto; width: 100%; min-width: 0; height: auto; }

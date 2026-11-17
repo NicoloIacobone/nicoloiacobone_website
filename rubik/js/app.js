@@ -563,9 +563,9 @@ function drawStrip(moves, done) {
 
 /**
  * Cubo visto da chi risolve: strato da girare acceso, frecce del movimento (come draw_move_icon).
- * The geometry is iconGeometry's, unchanged. The look is the design system's: the stickers in the sticker
- * tokens (dimmed on dark plastic outside the layer that turns), the edge of that layer and the arrows in
- * rubik-yellow, each arrow outlined in rubik-body so it reads on any sticker.
+ * The geometry is iconGeometry's, unchanged. The look is the design system's: the stickers in their real
+ * colours (the sticker tokens) on rubik-body, the layer that turns set apart by a rubik-white border, the
+ * arrows in rubik-yellow, each outlined in rubik-body so it reads on any sticker.
  */
 function drawMoveIcon(state, move) {
   const svg = "http://www.w3.org/2000/svg";
@@ -574,8 +574,7 @@ function drawMoveIcon(state, move) {
   const shapes = stickers.map(({ corners, letter, inLayer }) => {
     const polygon = document.createElementNS(svg, "polygon");
     polygon.setAttribute("points", corners.map(point).join(" "));
-    const fill = inLayer ? faceInk(letter) : `color-mix(in oklab, ${faceInk(letter)} 35%, var(--rubik-body))`;
-    polygon.style.fill = fill;
+    polygon.style.fill = faceInk(letter);
     if (inLayer) polygon.setAttribute("class", "icon__layer");
     return polygon;
   });
