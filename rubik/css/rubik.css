@@ -3,7 +3,8 @@
    docs/rubik-solver.md and examples/rubik-solver.html of the design system: the blocks below carry the names
    of its comments ("Solver head", "Solver screen", "The move", "How it works").
    The matter is the cube's: --ni-accent is --rubik-text inside <main>; Nav, buttons and footer stay shell.
-   Tokens only: no colour, font, radius or shadow of its own. */
+   No colour, font or shadow of its own: tokens only. The few literal sizes (the sticker of a step, the
+   cells of the cross of faces, the icon) are copied from the example or kept from the page. */
 
 /* ---------- Base ---------- */
 html { -webkit-text-size-adjust: 100%; }
@@ -17,8 +18,9 @@ button { font: inherit; color: inherit; }
 .rubik { --ni-accent: var(--rubik-text); }
 .rk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-/* A warning or a success is a text line in ink, marked by a sticker: drawing colours never colour text. */
-.is-warn, .is-error, .is-ok { color: var(--ink); }
+/* A warning or a success is a text line in ink, marked by a sticker: drawing colours never colour text.
+   Compound selectors, so they beat the muted colour of .rk-hint, .rk-load and .rk-event. */
+.rk-hint.is-warn, .rk-event.is-warn, .rk-status.is-warn, .rk-load.is-error, .rk-status.is-ok { color: var(--ink); }
 .is-warn::before, .is-error::before, .is-ok::before {
   content: ""; display: inline-block; width: .62em; height: .62em; margin-right: .45em; vertical-align: .02em;
   border: 2px solid var(--rubik-body); border-radius: 4px; background: var(--rubik-red);
@@ -152,6 +154,10 @@ button { font: inherit; color: inherit; }
 @media (max-width: 1099px) {
   .rk-head, .rk-screen, .rk-about { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-5); }
   .rk-head__cover { align-self: center; width: min(100%, 360px); box-sizing: border-box; }
+}
+/* a tablet held sideways stacks too, but is not in app mode: the camera is capped so status and buttons stay near */
+@media (min-width: 821px) and (max-width: 1099px) {
+  .rk-camera { max-height: 60vh; }
 }
 @media (max-width: 767px) {
   .page { padding-inline: var(--space-4); }
