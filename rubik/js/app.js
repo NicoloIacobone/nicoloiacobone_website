@@ -16,11 +16,20 @@ const OPENCV_URL = new URL("../vendor/opencv/opencv.js", import.meta.url);
 const SHORT_SIDE = 480;
 const LONG_SIDE = 640;
 
-// Colori di visualizzazione delle facce (come ICON_COLORS di guide.py, in RGB).
-const FACE_COLORS = { U: [240, 240, 240], R: [210, 40, 40], F: [40, 180, 60], D: [240, 220, 30], L: [250, 130, 20], B: [20, 90, 200] };
-const COLOR_READING = [255, 220, 0]; // giallo: faccia trovata, in lettura
-const COLOR_OK = [0, 220, 0]; // verde: acquisita
-const COLOR_WARN = "rgb(255, 40, 40)";
+// Sticker token of each face (--rubik-<name> of the design system): the move icon and the strip use them.
+const FACE_INKS = { U: "white", R: "red", F: "green", D: "yellow", L: "orange", B: "blue" };
+const faceInk = (letter) => `var(--rubik-${FACE_INKS[letter]})`;
+// Colours drawn over the camera, read from the tokens through the hidden elements [data-ink] of the page,
+// as js/stage.js of the site does: the frame of a face being read (yellow) turns green when it is held
+// still, a covered sticker is marked in red, and dark plastic outlines what is drawn. Read again when the
+// theme changes, and at every start of the scan.
+const ink = {};
+function readInks() {
+  document.querySelectorAll("[data-ink]").forEach((el) => {
+    const m = getComputedStyle(el).color.match(/[\d.]+/g);
+    if (m) ink[el.dataset.ink] = m.slice(0, 3).map(Number);
+  });
+}
 // Croce delle facce: [colonna, riga] di ognuna, come NET_LAYOUT di scan.py.
 const NET_LAYOUT = { U: [1, 0], L: [0, 1], F: [1, 1], R: [2, 1], B: [3, 1], D: [1, 2] };
 
@@ -57,6 +66,7 @@ const ui = {
   moveName: $("moveName"),
   moveText: $("moveText"),
   moveCount: $("moveCount"),
+  strip: $("moveStrip"),
   moveList: $("moveList"),
   guideStatus: $("guideStatus"),
   solved: $("solved"),
@@ -177,6 +187,7 @@ async function start() {
 
 function startScan() {
   phase = "scan";
+  readInks();
   scan = new AutoScan();
   face = null;
   scanEvent = null;
@@ -286,7 +297,7 @@ function onScanEvent(code) {
 function drawOverlay(progress) {
   const context = viewContext;
   if (face === null) return;
-  const mix = COLOR_OK.map((c, i) => Math.round(c * progress + COLOR_READING[i] * (1 - progress)));
+  const mix = ink.green.map((c, i) => Math.round(c * progress + ink.yellow[i] * (1 - progress)));
   context.lineJoin = "round";
   context.lineWidth = 3;
   context.strokeStyle = rgb(mix);
@@ -298,7 +309,7 @@ function drawOverlay(progress) {
     const [x, y] = face.centers[k];
     const radius = Math.max(3, Math.hypot(cell[0][0] - cell[2][0], cell[0][1] - cell[2][1]) / 8);
     if (face.seen[k]) {
-      context.fillStyle = "#000";
+      context.fillStyle = rgb(ink.body);
       context.beginPath();
       context.arc(x, y, radius + 1, 0, 2 * Math.PI);
       context.fill();
@@ -307,14 +318,20 @@ function drawOverlay(progress) {
       context.arc(x, y, radius, 0, 2 * Math.PI);
       context.fill();
     } else {
-      context.strokeStyle = COLOR_WARN;
-      context.lineWidth = 2;
+      // the red X over dark plastic, so it reads on a red sticker too
       context.beginPath();
       context.moveTo(x - radius, y - radius);
       context.lineTo(x + radius, y + radius);
       context.moveTo(x - radius, y + radius);
       context.lineTo(x + radius, y - radius);
+      context.lineCap = "round";
+      context.strokeStyle = rgb(ink.body);
+      context.lineWidth = 5;
       context.stroke();
+      context.strokeStyle = rgb(ink.red);
+      context.lineWidth = 2;
+      context.stroke();
+      context.lineCap = "butt";
     }
   });
 }
@@ -505,6 +522,7 @@ function renderGuide() {
     ui.moveName.textContent = move;
     ui.moveText.textContent = `${describeMove(move)} ${t("guide.look")}`;
     ui.moveCount.textContent = t("guide.count", { k: history.length + 1, n: history.length + guide.plan.length });
+    drawStrip([...history, ...guide.plan], history.length);
     drawMoveIcon(cubeState, move);
   }
   ui.moveList.replaceChildren(
@@ -518,7 +536,37 @@ function renderGuide() {
   );
 }
 
-/** Cubo visto da chi risolve: strato da girare acceso, frecce del movimento (come draw_move_icon). */
+/**
+ * Strip of stickers under the move, on dark plastic: one sticker per move of the solution. A move made takes
+ * the colour of the face it turned, the next one is off with a white ring, the others are off.
+ */
+function drawStrip(moves, done) {
+  const svg = "http://www.w3.org/2000/svg";
+  const [cell, gap, pad] = [12, 3, 5];
+  const width = moves.length * (cell + gap) - gap + 2 * pad;
+  const height = cell + 2 * pad;
+  const rect = (x, y, w, h, rx, style) => {
+    const r = document.createElementNS(svg, "rect");
+    Object.entries({ x, y, width: w, height: h, rx }).forEach(([k, v]) => r.setAttribute(k, String(v)));
+    r.setAttribute("style", style);
+    return r;
+  };
+  const stickers = moves.map((m, k) => {
+    const fill = k < done ? faceInk(parseMove(m)[0]) : "var(--rubik-off)";
+    const ring = k === done ? ";stroke:var(--rubik-white);stroke-width:1.5" : "";
+    return rect(pad + k * (cell + gap), pad, cell, cell, 2.6, `fill:${fill}${ring}`);
+  });
+  ui.strip.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  ui.strip.style.maxWidth = `${width}px`;
+  ui.strip.replaceChildren(rect(0, 0, width, height, 7, "fill:var(--rubik-body)"), ...stickers);
+}
+
+/**
+ * Cubo visto da chi risolve: strato da girare acceso, frecce del movimento (come draw_move_icon).
+ * The geometry is iconGeometry's, unchanged. The look is the design system's: the stickers in the sticker
+ * tokens (dimmed on dark plastic outside the layer that turns), the edge of that layer and the arrows in
+ * rubik-yellow, each arrow outlined in rubik-body so it reads on any sticker.
+ */
 function drawMoveIcon(state, move) {
   const svg = "http://www.w3.org/2000/svg";
   const { stickers, arrows } = iconGeometry(state, move);
@@ -526,19 +574,20 @@ function drawMoveIcon(state, move) {
   const shapes = stickers.map(({ corners, letter, inLayer }) => {
     const polygon = document.createElementNS(svg, "polygon");
     polygon.setAttribute("points", corners.map(point).join(" "));
-    const color = inLayer ? FACE_COLORS[letter] : FACE_COLORS[letter].map((c) => Math.round(0.35 * c));
-    polygon.setAttribute("fill", rgb(color));
+    const fill = inLayer ? faceInk(letter) : `color-mix(in oklab, ${faceInk(letter)} 35%, var(--rubik-body))`;
+    polygon.style.fill = fill;
     if (inLayer) polygon.setAttribute("class", "icon__layer");
     return polygon;
   });
-  const lines = arrows.map(([from, to]) => {
-    const line = document.createElementNS(svg, "line");
-    const [[x1, y1], [x2, y2]] = [from, to];
-    Object.entries({ x1, y1: -y1, x2, y2: -y2 }).forEach(([k, v]) => line.setAttribute(k, v.toFixed(3)));
-    line.setAttribute("class", "icon__arrow");
-    line.setAttribute("marker-end", "url(#arrowhead)");
-    return line;
-  });
+  const line = ([[x1, y1], [x2, y2]], className, head) => {
+    const l = document.createElementNS(svg, "line");
+    Object.entries({ x1, y1: -y1, x2, y2: -y2 }).forEach(([k, v]) => l.setAttribute(k, v.toFixed(3)));
+    l.setAttribute("class", className);
+    if (head) l.setAttribute("marker-end", "url(#arrowhead)");
+    return l;
+  };
+  // the outlines first, then the arrows over them
+  const lines = [...arrows.map((a) => line(a, "icon__arrow-edge", false)), ...arrows.map((a) => line(a, "icon__arrow", true))];
   ui.moveIcon.querySelectorAll("polygon, line").forEach((n) => n.remove());
   ui.moveIcon.append(...shapes, ...lines);
 }
@@ -614,6 +663,10 @@ document.addEventListener("keydown", (event) => {
 window.addEventListener("pagehide", stopCamera);
 
 buildNet();
+readInks();
+// the theme switch sets data-theme on <html>; without a saved choice the system theme decides
+new MutationObserver(readInks).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", readInks);
 setupPage(() => {
   if (ui.load.dataset.key) showLoad(ui.load.dataset.key, JSON.parse(ui.load.dataset.params), ui.load.classList.contains("is-error"));
   if (phase === "scan") renderScan(performance.now() / 1000);

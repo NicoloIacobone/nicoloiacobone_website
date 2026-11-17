@@ -71,6 +71,8 @@
 
   <!-- The video is only a source: it stays in the page (Safari does not update a video that is removed or display:none). -->
   <video class="rk-source" id="video" playsinline muted aria-hidden="true"></video>
+  <!-- The colours app.js draws over the camera, read from the tokens. -->
+  <span class="rk-inks" aria-hidden="true"><i data-ink="yellow"></i><i data-ink="green"></i><i data-ink="red"></i><i data-ink="body"></i></span>
 
   <!-- Solver screen: the camera on the left, what to do on the right. app.js moves #stage between the two screens. -->
   <section class="rk-screen rk-screen--scan rubik__screen" id="scanSection" hidden>
@@ -110,7 +112,7 @@
           <svg class="rk-move__icon" id="moveIcon" viewBox="-2.3 -2.3 4.6 4.6" aria-hidden="true">
             <defs>
               <marker id="arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                <path d="M0 0 L10 5 L0 10 z" fill="#ffff00" stroke="#000" stroke-width="1"/>
+                <path d="M0 0 L10 5 L0 10 z" style="fill:var(--rubik-yellow);stroke:var(--rubik-body)" stroke-width="1.6" stroke-linejoin="round"/>
               </marker>
             </defs>
           </svg>
@@ -121,6 +123,7 @@
           </div>
         </div>
         <div class="rk-progress">
+          <svg class="rk-strip" id="moveStrip" aria-hidden="true"></svg>
           <p class="rk-move__count" id="moveCount"></p>
         </div>
       </div>

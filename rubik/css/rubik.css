@@ -114,12 +114,21 @@ button { font: inherit; color: inherit; }
 .rk-current { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; }
 .rk-move { display: grid; grid-template-columns: 104px 1fr; gap: var(--space-4); align-items: center; width: 100%; }
 .rk-move__icon { display: block; width: 104px; height: 104px; border-radius: var(--radius-sm); background: var(--rubik-body); }
-.icon__layer { stroke: var(--rubik-white); stroke-width: .04; }
+/* the layer that turns: lit stickers with a yellow edge; the arrows yellow, outlined in dark plastic */
+.icon__layer { stroke: var(--rubik-yellow); stroke-width: .05; stroke-linejoin: round; }
+.icon__arrow-edge { stroke: var(--rubik-body); stroke-width: .19; stroke-linecap: round; }
 .icon__arrow { stroke: var(--rubik-yellow); stroke-width: .09; stroke-linecap: round; }
+.rk-strip { display: block; flex: 0 1 auto; width: 100%; min-width: 0; height: auto; }
+.rk-inks { position: absolute; width: 0; height: 0; overflow: hidden; visibility: hidden; }
+.rk-inks [data-ink="yellow"] { color: var(--rubik-yellow); }
+.rk-inks [data-ink="green"] { color: var(--rubik-green); }
+.rk-inks [data-ink="red"] { color: var(--rubik-red); }
+.rk-inks [data-ink="body"] { color: var(--rubik-body); }
 .rk-move__text { min-width: 0; }
 .rk-move__name { margin: 2px 0; color: var(--ni-accent); font: 900 64px/1 var(--font-display); letter-spacing: -.02em; }
 .rk-move__description { font: 400 17px/1.5 var(--font-text); }
-.rk-progress { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.rk-progress { display: flex; align-items: center; gap: var(--space-3); width: 100%; }
+.rk-progress .rk-move__count { flex: none; }
 .rk-move__count { color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
 .rk-solved { display: flex; flex-direction: column; gap: var(--space-2); }
 .rk-keys { color: var(--muted); font: 400 12px/1.4 var(--font-mono); }
