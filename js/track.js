@@ -65,12 +65,26 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(here - 1); }
   });
   // a mouse wheel moves the track, unless the card under it still has something to scroll.
-  // A sideways gesture (two fingers on a trackpad) belongs to the browser for its whole length: an event in it
-  // that is empty or drifts vertically must not become a scroll of the track, or the two fight and the track jerks.
-  var sideways = -1e9;
+  // A sideways gesture (two fingers on a trackpad) belongs to the browser for its whole length, its first events
+  // included: the axis is decided once per gesture, and nothing is prevented or scrolled before it is clear.
+  // A swipe often starts with a small diagonal event; preventing it and scrolling the track by it started a
+  // smooth scroll against the browser's own, and Safari makes a gesture whose first event was prevented wait
+  // for the script at every event. Anything unclear goes to the browser.
+  var last = -1e9, axis = '', sx = 0, sy = 0;
+  function fine(e) { return e.deltaMode === 0 && typeof e.wheelDeltaY === 'number' && Math.abs(e.wheelDeltaY + 3 * e.deltaY) < 3; }   // a trackpad, not the notches of a wheel
   track.addEventListener('wheel', function (e) {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { sideways = e.timeStamp; return; }
-    if (!e.deltaY || e.timeStamp - sideways < 300) return;
+    var x = Math.abs(e.deltaX), y = Math.abs(e.deltaY);
+    if (e.timeStamp - last > 200) { axis = ''; sx = sy = 0; }   // after a pause: a new gesture, or a new turn of the wheel
+    last = e.timeStamp;
+    if (!x && !y) return;
+    sx += x; sy += y;
+    if (!axis) {
+      if (sy < 3 * sx) axis = 'x';                    // it moves sideways, even in part: the browser's
+      else if (sy >= 8 || !fine(e)) axis = 'y';       // a wheel notch decides at once, a trackpad after a few pixels
+      else return;
+    }
+    if (axis === 'y' && x > y) axis = 'x';           // the gesture turned sideways: the browser's until it ends
+    if (axis === 'x') return;
     var s = e.target.closest('.stop');
     if (s && s.scrollHeight > s.clientHeight + 1) {
       var up = e.deltaY < 0;
